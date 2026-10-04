@@ -27,15 +27,15 @@
       "icon": "react",
       "topics": [
         { "title": "Components & props", "description": "Composition, props, children, and conditional rendering.", "route": "reactComponents" },
-        { "title": "State & events", "description": "useState, event handlers, and lifting state up." },
-        { "title": "Effects", "description": "useEffect, cleanup, and synchronising with the outside world." },
-        { "title": "Lists & keys", "description": "Rendering collections with stable keys." },
-        { "title": "Forms", "description": "Controlled inputs, validation, and form actions." },
-        { "title": "Context", "description": "Sharing values without passing props through every level." },
-        { "title": "Refs & the DOM", "description": "useRef, focus, and measuring elements." },
-        { "title": "Suspense & lazy loading", "description": "Code splitting and loading states." },
-        { "title": "Transitions & actions", "description": "useTransition, useActionState, and useOptimistic." },
-        { "title": "Accessibility & testing", "description": "Semantic HTML, ARIA, and Testing Library." }
+        { "title": "State & events", "description": "useState, event handlers, and lifting state up.", "route": "reactState" },
+        { "title": "Effects", "description": "useEffect, cleanup, and synchronising with the outside world.", "route": "reactEffects" },
+        { "title": "Lists & keys", "description": "Rendering collections with stable keys.", "route": "reactLists" },
+        { "title": "Forms", "description": "Controlled inputs, validation, and form actions.", "route": "reactForms" },
+        { "title": "Context", "description": "Sharing values without passing props through every level.", "route": "reactContext" },
+        { "title": "Refs & the DOM", "description": "useRef, focus, and measuring elements.", "route": "reactRefs" },
+        { "title": "Suspense & lazy loading", "description": "Code splitting and loading states.", "route": "reactSuspense" },
+        { "title": "Transitions & actions", "description": "useTransition, useActionState, and useOptimistic.", "route": "reactTransitions" },
+        { "title": "Accessibility & testing", "description": "Semantic HTML, ARIA, and Testing Library.", "route": "reactAccessibility" }
       ]
     },
     {

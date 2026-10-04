@@ -16,8 +16,8 @@ Show how React builds a page from components that take props, wrap children, and
 
 ### Out of scope
 
-- State management beyond `useState` (planned topic: State & events).
-- Effects, context, and refs (planned topics).
+- State management beyond `useState` (see [State & events](../state/state_requirement.md)).
+- Effects, context, and refs (see [Effects](../effects/effects_requirement.md), [Context](../context/context_requirement.md), and [Refs & the DOM](../refs/refs_requirement.md)).
 
 ## Behavior
 

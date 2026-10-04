@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ComponentType } from 'react'
+import { lazy, Suspense, type ComponentType, type FunctionComponent } from 'react'
 import type { HttpResponse } from '@/features/httpclient/fetch/HttpResponse'
 import type { FeatureRoute } from './navigation/FeatureRoute'
 
@@ -6,6 +6,16 @@ import type { FeatureRoute } from './navigation/FeatureRoute'
 export interface FeatureNavigation {
   /** Opens the response screen for a completed HTTP request. */
   showResponse: (response: HttpResponse) => void
+}
+
+/**
+ * A few screens take optional props that only tests set (for example a shorter simulated latency).
+ * The destination renders them with no props, which this wrapper states in the types without a cast.
+ */
+function withoutProps(Screen: FunctionComponent): FunctionComponent<{ navigation: FeatureNavigation }> {
+  return function ScreenWithoutProps() {
+    return <Screen />
+  }
 }
 
 // Each feature is a separate chunk, loaded the first time its topic is opened.
@@ -21,6 +31,15 @@ const screens: Record<FeatureRoute, ComponentType<{ navigation: FeatureNavigatio
   typescriptIterators: lazy(() => import('@/features/typescript/iterators/IteratorsScreen').then((m) => ({ default: m.IteratorsScreen }))),
   typescriptStrings: lazy(() => import('@/features/typescript/strings/StringsScreen').then((m) => ({ default: m.StringsScreen }))),
   reactComponents: lazy(() => import('@/features/react/components/ComponentsScreen').then((m) => ({ default: m.ComponentsScreen }))),
+  reactState: lazy(() => import('@/features/react/state/StateScreen').then((m) => ({ default: m.StateScreen }))),
+  reactEffects: lazy(() => import('@/features/react/effects/EffectsScreen').then((m) => ({ default: withoutProps(m.EffectsScreen) }))),
+  reactLists: lazy(() => import('@/features/react/lists/ListsScreen').then((m) => ({ default: m.ListsScreen }))),
+  reactForms: lazy(() => import('@/features/react/forms/FormsScreen').then((m) => ({ default: withoutProps(m.FormsScreen) }))),
+  reactContext: lazy(() => import('@/features/react/context/ContextScreen').then((m) => ({ default: m.ContextScreen }))),
+  reactRefs: lazy(() => import('@/features/react/refs/RefsScreen').then((m) => ({ default: m.RefsScreen }))),
+  reactSuspense: lazy(() => import('@/features/react/suspense/SuspenseScreen').then((m) => ({ default: withoutProps(m.SuspenseScreen) }))),
+  reactTransitions: lazy(() => import('@/features/react/transitions/TransitionsScreen').then((m) => ({ default: withoutProps(m.TransitionsScreen) }))),
+  reactAccessibility: lazy(() => import('@/features/react/accessibility/AccessibilityScreen').then((m) => ({ default: m.AccessibilityScreen }))),
   fetch: lazy(() => import('@/features/httpclient/fetch/FetchScreen').then((m) => ({ default: m.FetchScreen }))),
   browserInfo: lazy(() => import('@/features/others/browserinfo/BrowserInfoScreen').then((m) => ({ default: m.BrowserInfoScreen }))),
 }

@@ -29,10 +29,9 @@ One `LabDemoPage` with three `LabDemoSection` cards. The sample components (`Gre
 
 | Gap | Effect | Suggested fix |
 | --- | --- | --- |
-| No render test for the screen | Only the navigation test opens it | Add a Testing Library test for the three interactions |
 | The badge uses `error` with `on-primary` text | Correct contrast in both themes, but not a matched role pair | Add an `on-error` token |
 
 ## Verification
 
-- Automated: `ContentView.test.tsx` renders the topic in the three-pane layout.
+- Automated: `ComponentsScreen.test.tsx` (props, tone switch, conditional badge); `ContentView.test.tsx` renders the topic in the three-pane layout.
 - Manual: CMP-AC-01 to CMP-AC-04 with the keyboard and VoiceOver, in light and dark mode.
