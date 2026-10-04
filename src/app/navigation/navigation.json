@@ -46,7 +46,7 @@
       "icon": "network",
       "topics": [
         { "title": "fetch", "description": "Native browser HTTP request sample.", "route": "fetch" },
-        { "title": "axios", "description": "A popular promise-based HTTP client." }
+        { "title": "axios", "description": "A popular promise-based HTTP client.", "route": "axios" }
       ]
     },
     {

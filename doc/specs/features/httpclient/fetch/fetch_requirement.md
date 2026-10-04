@@ -20,7 +20,7 @@ Let a developer build and send an HTTP request with the browser's native `fetch`
 ### Out of scope
 
 - Authentication, custom headers, cookies, and request history.
-- Third-party HTTP libraries (planned topic: axios).
+- Third-party HTTP libraries (see the [axios requirement](../axios/axios_requirement.md), which reuses this page).
 - Uploads and streaming.
 
 ## Behavior
@@ -85,7 +85,7 @@ Let a developer build and send an HTTP request with the browser's native `fetch`
 
 ## Technical implementation constraints
 
-- Source lives in `src/features/httpclient/fetch/`.
+- Source lives in `src/features/httpclient/fetch/`; the page layout, examples, and response view are shared with axios in `src/features/httpclient/shared/`.
 - The screen calls only `executeRequest` and keeps the response in its own state.
 - No new dependencies.
 

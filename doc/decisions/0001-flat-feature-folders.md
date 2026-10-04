@@ -1,6 +1,6 @@
 # 0001: One flat folder per feature and per app area, mirroring the iOS lab
 
-Status: Accepted, 2026-10-04
+Status: Accepted, 2026-10-04. Extended by [0008](0008-shared-http-client-layout-and-axios.md): a category may have a `shared/` folder for code its features share.
 
 ## Context
 

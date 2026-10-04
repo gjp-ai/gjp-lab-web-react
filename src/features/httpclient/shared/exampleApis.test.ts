@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { exampleApis, restfulApiIdPlaceholder } from './exampleApis'
-import { parseHttpUrl } from './fetchRepository'
+import { parseHttpUrl } from './httpRequest'
 import { httpMethods, supportsPayload } from './HttpResponse'
 
 describe('exampleApis', () => {

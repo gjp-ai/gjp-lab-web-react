@@ -1,27 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { executeRequest, FetchRepositoryError, parseHttpUrl, prettyJson } from './fetchRepository'
-
-describe('parseHttpUrl', () => {
-  it('accepts http and https, ignoring whitespace', () => {
-    expect(parseHttpUrl('  https://example.com/api ').href).toBe('https://example.com/api')
-    expect(parseHttpUrl('http://example.com').protocol).toBe('http:')
-  })
-
-  it('rejects other schemes and text that is not a URL', () => {
-    for (const text of ['ftp://example.com', 'example.com', '', 'javascript:alert(1)']) {
-      expect(() => parseHttpUrl(text), text).toThrow(FetchRepositoryError)
-    }
-  })
-})
-
-describe('prettyJson', () => {
-  it('indents objects and arrays and leaves other text alone', () => {
-    expect(prettyJson('{"a":1}')).toBe('{\n  "a": 1\n}')
-    expect(prettyJson('[1]')).toBe('[\n  1\n]')
-    expect(prettyJson('plain text')).toBe('plain text')
-    expect(prettyJson('42')).toBe('42')
-  })
-})
+import { executeRequest } from './fetchRepository'
 
 describe('executeRequest', () => {
   it('returns any HTTP status with a formatted body and sorted headers', async () => {

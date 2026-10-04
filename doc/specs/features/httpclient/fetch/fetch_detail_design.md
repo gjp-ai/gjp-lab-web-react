@@ -12,25 +12,15 @@ Show the smallest complete `fetch` round trip on one page: validate input, send 
 
 | Source | Responsibility |
 | --- | --- |
-| [`FetchScreen.tsx`](../../../../../src/features/httpclient/fetch/FetchScreen.tsx) | The Request, Response, and Code cards; form, response, loading and error state; cancellation on unmount; the implementation is imported with `?raw` |
-| [`fetchRepository.ts`](../../../../../src/features/httpclient/fetch/fetchRepository.ts) | `parseHttpUrl`, `executeRequest` (headers, payload, 15-second timeout, timing, error messages), and `prettyJson` |
-| [`exampleApis.ts`](../../../../../src/features/httpclient/fetch/exampleApis.ts) | `ExampleApi`, `RequestPreset`, and the examples for the seven APIs |
-| [`HttpResponse.ts`](../../../../../src/features/httpclient/fetch/HttpResponse.ts) | `HttpMethod`, `supportsPayload`, `HttpResponse` (with `durationMs` and `sizeBytes`), `reasonPhrase`, and `formatBytes` |
-| [`HttpResponseView.tsx`](../../../../../src/features/httpclient/fetch/HttpResponseView.tsx) | `StatusBadge`, `ResponseMeta` (time and size), and the Body and Headers tabs |
-| [`jsonPayload.ts`](../../../../../src/features/httpclient/fetch/jsonPayload.ts) | `checkPayload`: empty, JSON (with a formatted copy), or other text |
-| [`LabTabs.tsx`](../../../../../src/common/theme/LabTabs.tsx) | Shared accessible tabs |
+| [`FetchScreen.tsx`](../../../../../src/features/httpclient/fetch/FetchScreen.tsx) | The `HttpClient` for fetch, passed to the shared layout; the implementation is imported with `?raw` |
+| [`fetchRepository.ts`](../../../../../src/features/httpclient/fetch/fetchRepository.ts) | `executeRequest`: the 15-second timeout, cancellation, timing, and error messages around `fetch` |
 | [`fetchSnippet.ts`](../../../../../src/features/httpclient/fetch/fetchSnippet.ts) | `buildFetchSnippet`: the `fetch` call for the form's request |
+| [Shared layout](../shared/shared_detail_design.md) | The page, examples, response view, and request helpers shared with axios ([decision 0008](../../../../decisions/0008-shared-http-client-layout-and-axios.md)) |
 | [`FeatureDestination.tsx`](../../../../../src/app/FeatureDestination.tsx) | Lazily loads the screen for `fetch` |
 
 ## Ownership and state
 
-| State | Owner | Lifetime | Meaning |
-| --- | --- | --- | --- |
-| `method`, `url`, `payload` | `FetchScreen` (`useState`) | Screen | Request input; an example overwrites the method and URL, and the payload only for `POST` and `PUT` |
-| Chosen example API | `Examples` (`useState`) | Screen | Which API's examples are listed; starts at JSONPlaceholder |
-| `isLoading`, `errorMessage` | `FetchScreen` (`useState`) | Screen | In flight; last failure |
-| `controller` | `FetchScreen` (`useRef`) | Screen | Cancels the running request on a new send or unmount |
-| `response` | `FetchScreen` (`useState`) | Screen | The last completed response; cleared when a request fails |
+The page state (request input, chosen example API, loading, error, response, and the abort controller) is owned by `HttpClientScreen`; see the [shared layout](../shared/shared_detail_design.md#ownership-and-state).
 
 ## Request flow
 
@@ -38,7 +28,7 @@ Show the smallest complete `fetch` round trip on one page: validate input, send 
 flowchart TD
     Send[Send request] --> Abort[Abort any earlier request]
     Abort --> Validate{http or https?}
-    Validate -->|No| Invalid[FetchRepositoryError: valid URL]
+    Validate -->|No| Invalid[HttpRequestError: valid URL]
     Validate -->|Yes| Fetch[fetch with AbortSignal.any of caller and 15 s timeout]
     Fetch -->|Rejects| Kind{Why?}
     Kind -->|Timeout| Timeout[Timed out after 15 seconds]
@@ -67,5 +57,5 @@ flowchart TD
 
 ## Verification
 
-- Automated: `FetchScreen.test.tsx` (JSONPlaceholder default, examples and the snippet follow the form, switching the example API, the JSON hint and Format, status badge with time and size and the Body and Headers tabs through a stubbed `fetch`, a failure replaces the response, the implementation tab); `HttpResponse.test.ts` (reason phrases, sizes); `jsonPayload.test.ts`; `LabTabs.test.tsx`; `fetchSnippet.test.ts` (GET, JSON payload, plain and empty payloads); `exampleApis.test.ts` (seven APIs in order, https URLs on each API's host, payload only for `POST` and `PUT`, every method except for read-only PokeAPI, the id placeholder explained); `fetchRepository.test.ts` (URL validation, JSON formatting, status and header handling, request headers and payload, network failure, no request for an invalid URL); `ContentView.test.tsx` (an old `/response` URL opens the topic).
+- Automated: `fetchRepository.test.ts` (status and header handling, size and time, request headers and payload, network failure, no request for an invalid URL); `fetchSnippet.test.ts` (GET, JSON payload, plain and empty payloads); `FetchScreen.test.tsx` (sends with a stubbed `fetch` and shows the fetch code); the [shared layout](../shared/shared_detail_design.md#verification) tests; `ContentView.test.tsx` (an old `/response` URL opens the topic).
 - Manual: FET-AC-01 to FET-AC-13 in Chrome and Safari, with the network offline in developer tools.

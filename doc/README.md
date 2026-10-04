@@ -57,7 +57,18 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | TypeScript → Iterators & generators | [Requirement](specs/features/typescript/iterators/iterators_requirement.md) | [Detailed design](specs/features/typescript/iterators/iterators_detail_design.md) |
 | TypeScript → Strings & regex | [Requirement](specs/features/typescript/strings/strings_requirement.md) | [Detailed design](specs/features/typescript/strings/strings_detail_design.md) |
 | React → Components & props | [Requirement](specs/features/react/components/components_requirement.md) | [Detailed design](specs/features/react/components/components_detail_design.md) |
+| React → State & events | [Requirement](specs/features/react/state/state_requirement.md) | [Detailed design](specs/features/react/state/state_detail_design.md) |
+| React → Effects | [Requirement](specs/features/react/effects/effects_requirement.md) | [Detailed design](specs/features/react/effects/effects_detail_design.md) |
+| React → Lists & keys | [Requirement](specs/features/react/lists/lists_requirement.md) | [Detailed design](specs/features/react/lists/lists_detail_design.md) |
+| React → Forms | [Requirement](specs/features/react/forms/forms_requirement.md) | [Detailed design](specs/features/react/forms/forms_detail_design.md) |
+| React → Context | [Requirement](specs/features/react/context/context_requirement.md) | [Detailed design](specs/features/react/context/context_detail_design.md) |
+| React → Refs & the DOM | [Requirement](specs/features/react/refs/refs_requirement.md) | [Detailed design](specs/features/react/refs/refs_detail_design.md) |
+| React → Suspense & lazy loading | [Requirement](specs/features/react/suspense/suspense_requirement.md) | [Detailed design](specs/features/react/suspense/suspense_detail_design.md) |
+| React → Transitions & actions | [Requirement](specs/features/react/transitions/transitions_requirement.md) | [Detailed design](specs/features/react/transitions/transitions_detail_design.md) |
+| React → Accessibility & testing | [Requirement](specs/features/react/accessibility/accessibility_requirement.md) | [Detailed design](specs/features/react/accessibility/accessibility_detail_design.md) |
 | HTTP Client → fetch | [Requirement](specs/features/httpclient/fetch/fetch_requirement.md) | [Detailed design](specs/features/httpclient/fetch/fetch_detail_design.md) |
+| HTTP Client → axios | [Requirement](specs/features/httpclient/axios/axios_requirement.md) | [Detailed design](specs/features/httpclient/axios/axios_detail_design.md) |
+| HTTP Client shared layout | — | [Shared layout detailed design](specs/features/httpclient/shared/shared_detail_design.md) |
 | Others → Browser & device | [Requirement](specs/features/others/browserinfo/browserinfo_requirement.md) | [Detailed design](specs/features/others/browserinfo/browserinfo_detail_design.md) |
 | New features | [Requirement template](templates/requirement.md) | [Detail design template](templates/detail_design.md) |
 

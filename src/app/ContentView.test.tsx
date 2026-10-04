@@ -60,11 +60,14 @@ describe('ContentView', () => {
     expect(screen.getByText('Choose a topic')).toBeInTheDocument()
   })
 
-  it('shows planned topics without a link', () => {
+  it('shows available topics as links and planned topics without one', () => {
     renderAt('/httpClient', 400)
     expect(screen.getByRole('link', { name: /fetch/ })).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: /axios/ })).not.toBeInTheDocument()
-    expect(screen.getByRole('img', { name: 'Planned' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /axios/ })).toBeInTheDocument()
+
+    renderAt('/security', 400)
+    expect(screen.queryByRole('link', { name: /Content Security Policy/ })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('img', { name: 'Planned' })).toHaveLength(3)
   })
 
   it('falls back to the nearest valid level for an unknown URL', () => {
