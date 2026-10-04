@@ -1,6 +1,6 @@
 # 0003: The URL is the navigation state, shown as adaptive panes
 
-Status: Accepted, 2026-10-04
+Status: Accepted, 2026-10-04. Amended by [0005](0005-desktop-tree-sidebar.md): desktop browsers use a tree sidebar instead of the panes.
 
 ## Context
 

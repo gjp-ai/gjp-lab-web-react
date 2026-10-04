@@ -22,9 +22,10 @@ Give users one starting point that lists every lab category, and leads to its to
 ## Behavior
 
 - Every level has a URL: `/` (categories), `/<category>`, `/<category>/<topic route>`, and `/<category>/<topic route>/response` for a pushed screen. Reloading or sharing a URL opens the same screen.
-- **1200 px and wider:** categories, catalogue, and feature side by side; empty panes say "Choose a category" or "Choose a topic".
-- **840 px to under 1200 px:** two panes: categories, or the catalogue with a back link, then the feature.
-- **Under 840 px:** one level at a time with a back link; the browser's Back button also moves up.
+- **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or "Choose a topic" at `/`.
+- **1200 px and wider on a touch screen:** categories, catalogue, and feature side by side; empty panes say "Choose a category" or "Choose a topic".
+- **840 px to under 1200 px on a touch screen:** two panes: categories, or the catalogue with a back link, then the feature.
+- **Under 840 px, any pointer:** one level at a time with a back link; the browser's Back button also moves up.
 - An unknown category or topic in the URL falls back to the nearest valid level.
 - Categories appear in this order: TypeScript, React, HTTP Client, Security, Integration, Others.
 
@@ -38,7 +39,7 @@ Give users one starting point that lists every lab category, and leads to its to
 ## Rules & Constraints
 
 - Category text and icons come from `navigation.json`; the sidebar does not hard-code them.
-- Layout depends on window width only, never on the device or user agent.
+- Layout depends on the window width and the primary pointer (CSS media features), never on the user agent.
 
 ## Platform limitations
 
@@ -54,6 +55,7 @@ Give users one starting point that lists every lab category, and leads to its to
 | SDB-AC-04 | Reload a topic URL | The same topic opens after the splash. |
 | SDB-AC-05 | Open `/typescript/notATopic` | The TypeScript catalogue opens. |
 | SDB-AC-06 | Keyboard only | Tab reaches every row, and Enter opens it. |
+| SDB-AC-07 | Desktop browser at 1400 px: open a topic, then open and close another category | A tree sidebar and the feature; the selected topic is marked, and groups open and close with `aria-expanded`. |
 
 ## Technical implementation constraints
 

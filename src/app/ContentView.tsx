@@ -6,12 +6,14 @@ import { FeatureCatalogScreen } from './navigation/FeatureCatalogScreen'
 import { type FeatureRoute, isFeatureRoute } from './navigation/FeatureRoute'
 import { findCategory, findTopic, navigationMenu, type NavigationCategory } from './navigation/NavigationMenu'
 import { NavigationPane, NavigationPlaceholder } from './navigation/NavigationPane'
-import { paneLayout, useWindowWidth } from './navigation/paneLayout'
+import { NavigationTree } from './navigation/NavigationTree'
+import { paneLayout, useFinePointer, useWindowWidth } from './navigation/paneLayout'
 
 /**
  * The app's navigation: categories, catalogue, and feature. The URL is the selection
  * (`/`, `/<category>`, `/<category>/<route>`, `/<category>/<route>/response`), so every screen can be
- * linked and the browser's Back button moves up one level. Wide windows show the levels side by side.
+ * linked and the browser's Back button moves up one level. Wide touch screens show the levels side by side;
+ * wide windows with a mouse show a tree sidebar next to the content.
  */
 export function ContentView() {
   return (
@@ -33,7 +35,7 @@ function Panes() {
   const params = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const layout = paneLayout(useWindowWidth())
+  const layout = paneLayout(useWindowWidth(), useFinePointer())
 
   // An unknown category, topic, or pushed screen falls back to the nearest valid level.
   const category = findCategory(params.categoryId)
@@ -83,6 +85,23 @@ function Panes() {
   }
 
   const divider = <div className="w-px shrink-0 bg-outline-variant" aria-hidden="true" />
+
+  // Desktop: the tree lists every topic, so the content pane shows the feature, or the catalogue's overview.
+  if (layout === 'sidebar') {
+    return (
+      <div className="flex h-full">
+        <NavigationPane title="GJP Lab" className="w-72 shrink-0">
+          <NavigationTree categories={navigationMenu.categories} selectedCategoryId={category?.id} selectedRoute={selectedRoute} />
+        </NavigationPane>
+        {divider}
+        {selectedRoute !== undefined
+          ? feature(selectedRoute, false, 'flex-1')
+          : category !== undefined
+            ? catalog(category, false, 'flex-1')
+            : <NavigationPlaceholder text="Choose a topic" className="flex-1" />}
+      </div>
+    )
+  }
 
   if (layout === 'three') {
     return (

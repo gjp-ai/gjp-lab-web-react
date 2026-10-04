@@ -4,7 +4,7 @@ Status: Implemented snapshot, 2026-10-04
 
 ## Purpose
 
-GJPLab is a single-page web learning application. It favours small, readable feature slices over production-scale abstraction: React renders the interface, the URL is the navigation state, `ContentView` shows one, two, or three panes depending on the window width, components own small local state, and repositories isolate browser and network mechanics.
+GJPLab is a single-page web learning application. It favours small, readable feature slices over production-scale abstraction: React renders the interface, the URL is the navigation state, `ContentView` shows one, two, or three panes on touch screens and a tree sidebar beside the content on desktop browsers, components own small local state, and repositories isolate browser and network mechanics.
 
 ## Runtime flow
 
@@ -32,7 +32,7 @@ flowchart LR
 | --- | --- |
 | `src/app/` | `App` (startup phases), `ContentView` (routes and panes), and `FeatureDestination` (maps a `FeatureRoute` to its lazily loaded screen) |
 | `src/app/startup/` | Splash and maintenance screens, and `fetchMaintenanceMode` |
-| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout` and `useWindowWidth`; `NavigationPane`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
+| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `NavigationTree`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
 | `src/features/<category>/<feature>/` | Feature screens, repositories, models, and their tests |
 | `src/common/config/` | Stable application behaviour constants (`AppConfig`) |
 | `src/common/theme/` | Slate tokens (`theme.css`), `LabButton`, `LabListCard`, `LabDemoPage` and `LabDemoSection`, and `LabMark` |

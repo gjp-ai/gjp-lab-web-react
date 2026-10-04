@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ContentView } from './ContentView'
 
 function renderAt(path: string, width: number) {
@@ -13,8 +13,18 @@ function renderAt(path: string, width: number) {
   )
 }
 
+/** Reports a mouse as the primary pointer, as a desktop browser does. */
+function withMouse() {
+  vi.stubGlobal('matchMedia', (query: string) => ({
+    matches: query.includes('pointer: fine'),
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }))
+}
+
 afterEach(() => {
   window.innerWidth = 1024
+  vi.unstubAllGlobals()
 })
 
 describe('ContentView', () => {
@@ -64,5 +74,32 @@ describe('ContentView', () => {
   it('returns to the feature when a pushed screen has no data (for example after a reload)', async () => {
     renderAt('/httpClient/fetch/response', 400)
     expect(await screen.findByRole('heading', { level: 1, name: 'fetch' })).toBeInTheDocument()
+  })
+
+  it('shows a tree sidebar next to the feature on a desktop window', async () => {
+    withMouse()
+    const user = userEvent.setup()
+    renderAt('/typescript/typescriptBasics', 1400)
+    expect(await screen.findByRole('heading', { level: 1, name: 'Values & types' })).toBeInTheDocument()
+    // The catalogue pane is not shown: the selected category is open in the tree instead.
+    expect(screen.queryByRole('heading', { level: 1, name: 'TypeScript' })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'TypeScript' })).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('link', { name: 'Values & types' })).toHaveAttribute('aria-current', 'page')
+
+    const react = screen.getByRole('button', { name: 'React' })
+    expect(react).toHaveAttribute('aria-expanded', 'false')
+    await user.click(react)
+    expect(react).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText('State & events')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('link', { name: 'Components & props' }))
+    expect(await screen.findByRole('heading', { level: 1, name: 'Components & props' })).toBeInTheDocument()
+  })
+
+  it('shows the catalogue in the content pane when only a category is chosen on a desktop window', () => {
+    withMouse()
+    renderAt('/others', 1000)
+    expect(screen.getByRole('heading', { level: 1, name: 'Others' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Others' })).toHaveAttribute('aria-expanded', 'true')
   })
 })

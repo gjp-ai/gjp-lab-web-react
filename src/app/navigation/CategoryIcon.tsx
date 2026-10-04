@@ -33,13 +33,17 @@ const icons: Record<CategoryIconName, ReactNode> = {
   ),
 }
 
-/** A category icon in a 44 px tinted tile, as on the iOS sidebar. Decorative: the row's text names it. */
-export function CategoryIcon({ name }: { name: CategoryIconName }) {
+/**
+ * A category icon in a tinted tile: 44 px as on the iOS sidebar, or 28 px for the desktop tree.
+ * Decorative: the row's text names it.
+ */
+export function CategoryIcon({ name, size = 'regular' }: { name: CategoryIconName; size?: 'regular' | 'small' }) {
+  const tile = size === 'regular' ? 'size-11 rounded-xl' : 'size-7 rounded-md'
   return (
-    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-container" aria-hidden="true">
+    <span className={'flex shrink-0 items-center justify-center bg-primary-container ' + tile} aria-hidden="true">
       <svg
         viewBox="0 0 24 24"
-        className="size-6 text-on-surface"
+        className={(size === 'regular' ? 'size-6' : 'size-4') + ' text-on-surface'}
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
