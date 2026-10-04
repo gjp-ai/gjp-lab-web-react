@@ -11,9 +11,8 @@ GJPLab is a single-page web learning application. It favours small, readable fea
 ```mermaid
 flowchart LR
     Load[index.html + main.tsx] --> App
-    App --> Splash[SplashScreen]
-    Splash -->|3-second minimum + maintenance flag| Content[ContentView]
-    Splash -->|maintenance enabled| Maintenance[MaintenanceScreen]
+    App -->|maintenance flag off or unreadable| Content[ContentView]
+    App -->|maintenance enabled| Maintenance[MaintenanceScreen]
     Content --> Sidebar[CategorySidebar]
     Sidebar --> Catalog[FeatureCatalogScreen]
     Catalog --> Destination[FeatureDestination]
@@ -24,18 +23,18 @@ flowchart LR
     Fetch -->|/response| Response[HttpResponseScreen]
 ```
 
-[`main.tsx`](../../src/main.tsx) mounts [`App`](../../src/app/App.tsx) inside a `BrowserRouter` and loads the theme. `App` shows the splash while the maintenance flag loads, then [`ContentView`](../../src/app/ContentView.tsx) or the maintenance screen.
+[`main.tsx`](../../src/main.tsx) mounts [`App`](../../src/app/App.tsx) inside a `BrowserRouter` and loads the theme. `App` reads the maintenance flag (showing only the background meanwhile), then [`ContentView`](../../src/app/ContentView.tsx) or the maintenance screen.
 
 ## Code organization
 
 | Path | Responsibility |
 | --- | --- |
 | `src/app/` | `App` (startup phases), `ContentView` (routes and panes), and `FeatureDestination` (maps a `FeatureRoute` to its lazily loaded screen) |
-| `src/app/startup/` | Splash and maintenance screens, and `fetchMaintenanceMode` |
+| `src/app/startup/` | The maintenance screen and `fetchMaintenanceMode` |
 | `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `DesktopSidebar`, `NavigationTree`, `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
 | `src/features/<category>/<feature>/` | Feature screens, repositories, models, and their tests |
 | `src/common/config/` | Stable application behaviour constants (`AppConfig`) and `preferenceStorage` (safe local storage access for saved preferences) |
-| `src/common/theme/` | Slate tokens (`theme.css`), `ColorSchemeToggle` and `useColorScheme`, `LabButton`, `LabListCard`, `LabDemoPage` and `LabDemoSection`, and `LabMark` |
+| `src/common/theme/` | Slate tokens (`theme.css`), `ColorSchemeToggle` and `useColorScheme`, `LabButton`, `LabListCard`, and `LabDemoPage` and `LabDemoSection` |
 | `src/common/codesample/` | `CodeSample`, `runSample`, and the runnable sample page and card used by the TypeScript topics |
 
 The layout and names mirror the iOS lab ([decision 0001](../decisions/0001-flat-feature-folders.md)). Folder names are lowercase and do not repeat their parent (`httpclient/fetch`). New code should follow the closest feature pattern; reusable app behaviour belongs in `common/`.
@@ -105,4 +104,4 @@ Then open `npm run dev` in a browser, check the console, and try phone, medium, 
 | Maintenance flag from a JSON file | No vendor SDK; a cached file can delay a change | A real remote-config service is integrated |
 | Unit and component tests only | No end-to-end browser tests | Cross-browser behaviour becomes important to preserve |
 
-Feature-specific behaviour belongs in the linked documents rather than this overview: [Slate design system](../specs/common/theme/theme_detail_design.md), [runnable code sample](../specs/common/codesample/codesample_detail_design.md), [splash](../specs/app/startup/splash_detail_design.md), [maintenance](../specs/app/startup/maintenance_detail_design.md), [sidebar and panes](../specs/app/navigation/sidebar_detail_design.md), [catalogue](../specs/app/navigation/catalog_detail_design.md), [Values & types](../specs/features/typescript/basics/basics_detail_design.md), [Null & undefined](../specs/features/typescript/nullish/nullish_detail_design.md), [Arrays, sets & maps](../specs/features/typescript/collections/collections_detail_design.md), [Functions & closures](../specs/features/typescript/functions/functions_detail_design.md), [Objects, classes & enums](../specs/features/typescript/classes/classes_detail_design.md), [Interfaces & generics](../specs/features/typescript/generics/generics_detail_design.md), [Error handling](../specs/features/typescript/errors/errors_detail_design.md), [Promises & async/await](../specs/features/typescript/promises/promises_detail_design.md), [Iterators & generators](../specs/features/typescript/iterators/iterators_detail_design.md), [Strings & regex](../specs/features/typescript/strings/strings_detail_design.md), [Components & props](../specs/features/react/components/components_detail_design.md), [State & events](../specs/features/react/state/state_detail_design.md), [Effects](../specs/features/react/effects/effects_detail_design.md), [Lists & keys](../specs/features/react/lists/lists_detail_design.md), [Forms](../specs/features/react/forms/forms_detail_design.md), [Context](../specs/features/react/context/context_detail_design.md), [Refs & the DOM](../specs/features/react/refs/refs_detail_design.md), [Suspense & lazy loading](../specs/features/react/suspense/suspense_detail_design.md), [Transitions & actions](../specs/features/react/transitions/transitions_detail_design.md), [Accessibility & testing](../specs/features/react/accessibility/accessibility_detail_design.md), [fetch](../specs/features/httpclient/fetch/fetch_detail_design.md), and [Browser & device](../specs/features/others/browserinfo/browserinfo_detail_design.md).
+Feature-specific behaviour belongs in the linked documents rather than this overview: [Slate design system](../specs/common/theme/theme_detail_design.md), [runnable code sample](../specs/common/codesample/codesample_detail_design.md), [maintenance](../specs/app/startup/maintenance_detail_design.md), [sidebar and panes](../specs/app/navigation/sidebar_detail_design.md), [catalogue](../specs/app/navigation/catalog_detail_design.md), [Values & types](../specs/features/typescript/basics/basics_detail_design.md), [Null & undefined](../specs/features/typescript/nullish/nullish_detail_design.md), [Arrays, sets & maps](../specs/features/typescript/collections/collections_detail_design.md), [Functions & closures](../specs/features/typescript/functions/functions_detail_design.md), [Objects, classes & enums](../specs/features/typescript/classes/classes_detail_design.md), [Interfaces & generics](../specs/features/typescript/generics/generics_detail_design.md), [Error handling](../specs/features/typescript/errors/errors_detail_design.md), [Promises & async/await](../specs/features/typescript/promises/promises_detail_design.md), [Iterators & generators](../specs/features/typescript/iterators/iterators_detail_design.md), [Strings & regex](../specs/features/typescript/strings/strings_detail_design.md), [Components & props](../specs/features/react/components/components_detail_design.md), [State & events](../specs/features/react/state/state_detail_design.md), [Effects](../specs/features/react/effects/effects_detail_design.md), [Lists & keys](../specs/features/react/lists/lists_detail_design.md), [Forms](../specs/features/react/forms/forms_detail_design.md), [Context](../specs/features/react/context/context_detail_design.md), [Refs & the DOM](../specs/features/react/refs/refs_detail_design.md), [Suspense & lazy loading](../specs/features/react/suspense/suspense_detail_design.md), [Transitions & actions](../specs/features/react/transitions/transitions_detail_design.md), [Accessibility & testing](../specs/features/react/accessibility/accessibility_detail_design.md), [fetch](../specs/features/httpclient/fetch/fetch_detail_design.md), and [Browser & device](../specs/features/others/browserinfo/browserinfo_detail_design.md).

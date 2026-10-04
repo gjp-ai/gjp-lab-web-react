@@ -13,7 +13,7 @@ function stubMaintenance(...flags: boolean[]) {
 function renderApp() {
   render(
     <MemoryRouter>
-      <App minimumSplashMs={0} />
+      <App />
     </MemoryRouter>,
   )
 }
@@ -23,7 +23,7 @@ afterEach(() => {
 })
 
 describe('App', () => {
-  it('shows the splash, then the navigation when maintenance is off', async () => {
+  it('shows an empty loading page, then the navigation when maintenance is off', async () => {
     stubMaintenance(false)
     renderApp()
     expect(screen.getByLabelText('Loading GJP Lab')).toBeInTheDocument()

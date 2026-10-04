@@ -52,7 +52,7 @@ Give users one starting point that lists every lab category, and leads to its to
 | SDB-AC-01 | Open `/` | All six categories are listed in order. |
 | SDB-AC-02 | Phone width: open a category, then a topic, then press Back twice | Catalogue, feature, then back to the catalogue and the categories. |
 | SDB-AC-03 | Wide window: select a category and a topic | Three panes; both selections are outlined. |
-| SDB-AC-04 | Reload a topic URL | The same topic opens after the splash. |
+| SDB-AC-04 | Reload a topic URL | The same topic opens. |
 | SDB-AC-05 | Open `/typescript/notATopic` | The TypeScript catalogue opens. |
 | SDB-AC-06 | Keyboard only | Tab reaches every row, and Enter opens it. |
 | SDB-AC-07 | Desktop browser at 1400 px: open a topic, then open and close another category | A tree sidebar and the feature; the selected topic is marked, and groups open and close with `aria-expanded`. |

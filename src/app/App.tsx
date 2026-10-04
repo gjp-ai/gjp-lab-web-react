@@ -3,17 +3,15 @@ import { AppConfig } from '@/common/config/AppConfig'
 import { ContentView } from './ContentView'
 import { fetchMaintenanceMode } from './startup/maintenanceMode'
 import { MaintenanceScreen } from './startup/MaintenanceScreen'
-import { SplashScreen } from './startup/SplashScreen'
 
-type Phase = 'splash' | 'maintenance' | 'app'
+type Phase = 'checking' | 'maintenance' | 'app'
 
 /**
- * The app root: shows the splash for at least `minimumSplashMs` while the maintenance flag loads, then
- * shows maintenance or the navigation. Both waits run at the same time; the later one decides when the
- * splash ends.
+ * The app root: reads the maintenance flag, then shows maintenance or the navigation. While the flag
+ * loads (usually a few milliseconds, at most `remoteConfigTimeoutMs`) the page shows only its background.
  */
-export function App({ minimumSplashMs = AppConfig.minimumSplashMs }: { minimumSplashMs?: number }) {
-  const [phase, setPhase] = useState<Phase>('splash')
+export function App() {
+  const [phase, setPhase] = useState<Phase>('checking')
   const [isRetrying, setIsRetrying] = useState(false)
 
   const loadMaintenanceMode = useCallback(
@@ -23,14 +21,13 @@ export function App({ minimumSplashMs = AppConfig.minimumSplashMs }: { minimumSp
 
   useEffect(() => {
     let isCurrent = true
-    const minimum = new Promise((resolve) => setTimeout(resolve, minimumSplashMs))
-    void Promise.all([loadMaintenanceMode(), minimum]).then(([maintenanceEnabled]) => {
+    void loadMaintenanceMode().then((maintenanceEnabled) => {
       if (isCurrent) setPhase(maintenanceEnabled ? 'maintenance' : 'app')
     })
     return () => {
       isCurrent = false
     }
-  }, [loadMaintenanceMode, minimumSplashMs])
+  }, [loadMaintenanceMode])
 
   const retry = async () => {
     setIsRetrying(true)
@@ -39,7 +36,7 @@ export function App({ minimumSplashMs = AppConfig.minimumSplashMs }: { minimumSp
     if (!maintenanceEnabled) setPhase('app')
   }
 
-  if (phase === 'splash') return <SplashScreen />
+  if (phase === 'checking') return <main className="h-full bg-background" aria-busy="true" aria-label="Loading GJP Lab" />
   if (phase === 'maintenance') return <MaintenanceScreen onRetry={() => void retry()} isRetrying={isRetrying} />
   return <ContentView />
 }

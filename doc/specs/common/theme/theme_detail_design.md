@@ -31,7 +31,6 @@ GJPLab uses a restrained, high-contrast Slate direction based on black, white, n
 - [`LabListCard`](../../../../src/common/theme/LabListCard.tsx): a navigation row as its own `surface` card with 18 px corners and a 0.5 px `outline-variant` border; a selected row gets a 1 px `primary` border. With `to` it is a link; without it, a plain card.
 - [`LabDemoPage` and `LabDemoSection`](../../../../src/common/theme/LabDemoSection.tsx): a demo page with an `on-surface-variant` introduction, and cards with an 18 px radius, a soft shadow, a real `h2` heading, a caption, and the live sample.
 - [`ColorSchemeToggle`](../../../../src/common/theme/ColorSchemeToggle.tsx): a 40 px round icon button named "Dark mode" with `aria-pressed`, showing a sun in light mode and a moon in dark mode. It sits in the "GJP Lab" pane header and at the bottom of the collapsed desktop rail. [`useColorScheme`](../../../../src/common/theme/colorScheme.ts) follows the system until it is pressed, then saves `gjpLab.colorScheme` in local storage and sets `data-theme`; an inline script in `index.html` applies the saved value before the first paint ([decision 0006](../../../decisions/0006-colour-scheme-toggle.md)).
-- [`LabMark`](../../../../src/common/theme/LabMark.tsx): the flask mark on the iOS 108-unit grid, drawn with `currentColor`. The favicon uses the same paths.
 
 ## Layout
 

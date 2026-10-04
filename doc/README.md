@@ -16,7 +16,6 @@ doc/
 ├── templates/                            requirement.md, detail_design.md
 └── specs/                                mirrors src/
     ├── app/startup/                      ↔ src/app/startup/
-    │   ├── splash_requirement.md / splash_detail_design.md
     │   └── maintenance_requirement.md / maintenance_detail_design.md
     ├── app/navigation/                   ↔ src/app/navigation/
     │   ├── sidebar_requirement.md / sidebar_detail_design.md   (sidebar and pane layout)
@@ -44,7 +43,6 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | Visual system | — | [Slate design system](specs/common/theme/theme_detail_design.md) |
 | Runnable code sample | — | [Code sample detailed design](specs/common/codesample/codesample_detail_design.md) (used by the TypeScript topics) |
 | Decisions | [Decision records](decisions/README.md): why the project is shaped the way it is | — |
-| Splash (startup) | [Splash requirement](specs/app/startup/splash_requirement.md) | [Splash detailed design](specs/app/startup/splash_detail_design.md) |
 | Maintenance (startup) | [Maintenance requirement](specs/app/startup/maintenance_requirement.md) | [Maintenance detailed design](specs/app/startup/maintenance_detail_design.md) |
 | Category sidebar and panes | [Sidebar requirement](specs/app/navigation/sidebar_requirement.md) | [Sidebar detailed design](specs/app/navigation/sidebar_detail_design.md) |
 | Category catalogue | [Catalogue requirement](specs/app/navigation/catalog_requirement.md) | [Catalogue detailed design](specs/app/navigation/catalog_detail_design.md) |

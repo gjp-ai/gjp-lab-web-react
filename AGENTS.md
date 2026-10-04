@@ -30,17 +30,17 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | Path | Contents |
 | --- | --- |
 | `src/main.tsx` | Entry point: router and theme |
-| `src/app/` | `App` (splash, maintenance, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds splash and maintenance |
+| `src/app/` | `App` (maintenance check, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds maintenance |
 | `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `DesktopSidebar` and `NavigationTree` (desktop sidebar, collapsible to an icon rail), `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
 | `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders) |
-| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabMark`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
+| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
 | `src/test/` | Test setup only |
 | `public/` | Favicon and the bundled `remote-config.json` (maintenance flag) |
 | `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice) |
 
 ## Architecture
 
-- Flow: `App` → splash (at least 3 s, while the maintenance flag loads) → maintenance or `ContentView` → sidebar → catalogue → feature.
+- Flow: `App` reads the maintenance flag (no splash) → maintenance or `ContentView` → sidebar → catalogue → feature.
 - `ContentView` reads the selection from the URL and picks a layout with `paneLayout`: one stack below 840 px; from 840 px, a tree sidebar beside the content when the primary pointer is a mouse, otherwise two panes (three from 1200 px). Do not keep navigation state anywhere else, and choose layouts with media features (width, pointer), never the user agent.
 - Sidebar and catalogue content lives only in `navigation.json`; a topic's `route` must be a value in `FeatureRoute.ts`, mapped to its screen in `FeatureDestination`. Do not hard-code categories or topics in components.
 - Components keep their own state with `useState`. Do not add a state library, context store, or data-fetching library as incidental refactoring.

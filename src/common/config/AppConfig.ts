@@ -1,7 +1,5 @@
 /** Stable application behaviour, shared with the iOS and Android labs. */
 export const AppConfig = {
-  /** The splash stays at least this long, even when the maintenance check is faster. */
-  minimumSplashMs: 3_000,
   /** The maintenance check gives up after this long and opens the app. */
   remoteConfigTimeoutMs: 5_000,
   /**

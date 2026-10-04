@@ -15,7 +15,7 @@ A sidebar lists the categories; each category's catalogue marks topics as availa
 | Integration | — | Firebase |
 | Others | **Browser & device**: browser, language, screen, pixel ratio, CPU, and memory | — |
 
-App-wide behaviour: a branded splash screen, a maintenance mode read from a JSON file, and a Slate light/dark design system.
+App-wide behaviour: a maintenance mode read from a JSON file at startup, and a Slate light/dark design system.
 
 ## Requirements
 
@@ -44,7 +44,7 @@ Maintenance mode is read from `public/remote-config.json` (`{ "maintenanceEnable
 ```
 src/
 ├── app/          App (startup), ContentView (routes and panes), FeatureDestination;
-│                 startup/ (splash, maintenance), navigation/ (navigation.json, sidebar, catalogue)
+│                 startup/ (maintenance), navigation/ (navigation.json, sidebar, catalogue)
 ├── features/     <category>/<feature>/, one flat folder per feature, tests alongside
 ├── common/       config/, theme/ (Slate tokens, LabButton, LabDemoPage), codesample/
 └── test/         test setup
