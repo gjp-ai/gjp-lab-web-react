@@ -25,7 +25,7 @@ flowchart LR
     Destination --> Browser[BrowserInfoScreen]
 ```
 
-[`main.tsx`](../../src/main.tsx) mounts [`App`](../../src/app/App.tsx) inside a `BrowserRouter` and loads the theme. `App` reads the maintenance flag (showing only the background meanwhile), then [`ContentView`](../../src/app/ContentView.tsx) or the maintenance screen.
+[`main.tsx`](../../src/main.tsx) mounts [`App`](../../src/app/App.tsx) inside a `BrowserRouter` whose `basename` is the deployment path (`/lab/react`) and loads the theme. Routes and links in the code are written without it. `App` reads the maintenance flag (showing only the background meanwhile), then [`ContentView`](../../src/app/ContentView.tsx) or the maintenance screen.
 
 ## Code organization
 
@@ -86,6 +86,7 @@ The browser's same-origin policy applies to every request: the fetch topic can o
 | UI | React 19, React Router 8, Tailwind CSS 4 |
 | Tests | Vitest 5 with jsdom and Testing Library |
 | Lint | oxlint (react, typescript, oxc plugins) |
+| Deployment path | `/lab/react/`: `base` in `vite.config.ts` prefixes asset URLs, `BrowserRouter` uses it as `basename`, and `AppConfig` builds the maintenance flag URL from `import.meta.env.BASE_URL`. The server must answer unknown paths below it with `index.html` (see the README) |
 
 ```bash
 npm run lint

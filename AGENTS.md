@@ -12,13 +12,13 @@ GJPLab is a web lab for practising TypeScript, React, browser APIs, and third-pa
 ## Tech Stack
 
 - React 19 and TypeScript (strict) built with Vite; npm. Runtime libraries: React, React Router, and axios (pinned exactly, used only by the axios topic; see [decision 0008](doc/decisions/0008-shared-http-client-layout-and-axios.md)).
-- React Router: the URL is the navigation state (`/`, `/<category>`, `/<category>/<route>`).
+- React Router: the URL is the navigation state (`/`, `/<category>`, `/<category>/<route>`), below the deployment path `/lab/react/` (Vite `base` and the router `basename`). Never hard-code `/lab/react/`: use router paths and `import.meta.env.BASE_URL`.
 - Tailwind CSS v4 with the Slate palette as theme tokens (`src/common/theme/theme.css`); no other CSS approach and no component library.
 - Tests: Vitest with jsdom and Testing Library, next to the code (`*.test.ts(x)`); lint with oxlint.
 
 ## Commands
 
-- Dev server: `npm run dev` (http://localhost:5173)
+- Dev server: `npm run dev` (http://localhost:5173/lab/react/)
 - Build (type-check, then bundle): `npm run build`
 - Lint: `npm run lint`
 - Test: `npm test` (`npm run test:watch` while developing)

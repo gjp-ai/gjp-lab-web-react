@@ -26,7 +26,7 @@ App-wide behaviour: a maintenance mode read from a JSON file at startup, and a S
 
 ```bash
 npm install
-npm run dev     # http://localhost:5173
+npm run dev     # http://localhost:5173/lab/react/
 ```
 
 Other commands:
@@ -35,6 +35,16 @@ Other commands:
 npm test        # Vitest unit and component tests
 npm run lint    # oxlint
 npm run build   # type-check and production build in dist/
+```
+
+## Deployment
+
+The app is served from `/lab/react/` (the `base` in `vite.config.ts`). Copy `dist/` to that path, and have the web server answer any URL below it that is not a file with `/lab/react/index.html`, so links such as `/lab/react/httpClient/fetch` work after a reload. For example, with nginx:
+
+```nginx
+location /lab/react/ {
+    try_files $uri /lab/react/index.html;
+}
 ```
 
 Maintenance mode is read from `public/remote-config.json` (`{ "maintenanceEnabled": false }`). To read it from a server instead, copy `.env.example` to `.env.local` and set `VITE_REMOTE_CONFIG_URL`.
