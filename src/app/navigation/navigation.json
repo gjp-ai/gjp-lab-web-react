@@ -1,0 +1,85 @@
+{
+  "categories": [
+    {
+      "id": "typescript",
+      "title": "TypeScript",
+      "summary": "The TypeScript language: types, narrowing, functions, async.",
+      "description": "Run small TypeScript samples and see what each language feature does.",
+      "icon": "code",
+      "topics": [
+        { "title": "Values & types", "description": "let, const, type inference, numbers, and template literals.", "route": "typescriptBasics" },
+        { "title": "Null & undefined", "description": "Optional values, narrowing, ?., ??, and the non-null assertion.", "route": "typescriptNullish" },
+        { "title": "Arrays, sets & maps", "description": "Collections, map, filter, reduce, and copying.", "route": "typescriptCollections" },
+        { "title": "Functions & closures", "description": "Default and rest parameters, arrow functions, and captured values.", "route": "typescriptFunctions" },
+        { "title": "Objects, classes & enums", "description": "Object types, classes, union types, and exhaustive switches.", "route": "typescriptClasses" },
+        { "title": "Interfaces & generics", "description": "Interfaces, type parameters, constraints, and utility types.", "route": "typescriptGenerics" },
+        { "title": "Error handling", "description": "throw, try/catch/finally, custom errors, and unknown.", "route": "typescriptErrors" },
+        { "title": "Promises & async/await", "description": "Promises, async functions, Promise.all, and cancellation.", "route": "typescriptPromises" },
+        { "title": "Iterators & generators", "description": "for…of, iterables, generators, and lazy sequences.", "route": "typescriptIterators" },
+        { "title": "Strings & regex", "description": "Unicode, template literals, and regular expressions.", "route": "typescriptStrings" }
+      ]
+    },
+    {
+      "id": "react",
+      "title": "React",
+      "summary": "Building web interfaces from components and state.",
+      "description": "A practical index of the React building blocks used in web interfaces.",
+      "icon": "react",
+      "topics": [
+        { "title": "Components & props", "description": "Composition, props, children, and conditional rendering.", "route": "reactComponents" },
+        { "title": "State & events", "description": "useState, event handlers, and lifting state up." },
+        { "title": "Effects", "description": "useEffect, cleanup, and synchronising with the outside world." },
+        { "title": "Lists & keys", "description": "Rendering collections with stable keys." },
+        { "title": "Forms", "description": "Controlled inputs, validation, and form actions." },
+        { "title": "Context", "description": "Sharing values without passing props through every level." },
+        { "title": "Refs & the DOM", "description": "useRef, focus, and measuring elements." },
+        { "title": "Suspense & lazy loading", "description": "Code splitting and loading states." },
+        { "title": "Transitions & actions", "description": "useTransition, useActionState, and useOptimistic." },
+        { "title": "Accessibility & testing", "description": "Semantic HTML, ARIA, and Testing Library." }
+      ]
+    },
+    {
+      "id": "httpClient",
+      "title": "HTTP Client",
+      "summary": "fetch, axios, and other ways to call an API.",
+      "description": "Compare the browser's native fetch API with a popular HTTP client library.",
+      "icon": "network",
+      "topics": [
+        { "title": "fetch", "description": "Native browser HTTP request sample.", "route": "fetch" },
+        { "title": "axios", "description": "A popular promise-based HTTP client." }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Security",
+      "summary": "Protecting sensitive content in the browser.",
+      "description": "Browser features that help protect sensitive content and user data.",
+      "icon": "shield",
+      "topics": [
+        { "title": "Hide content when the page is hidden", "description": "Blur sensitive content using the Page Visibility API." },
+        { "title": "Content Security Policy", "description": "Limit which scripts and resources a page may load." },
+        { "title": "Clipboard permissions", "description": "Read and write the clipboard only with permission." }
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "Integration",
+      "summary": "External SDKs and services. eg: Firebase",
+      "description": "External SDKs and services connected to the web app.",
+      "icon": "puzzle",
+      "topics": [
+        { "title": "Firebase", "description": "Analytics, Remote Config, Performance, and Messaging for the web." }
+      ]
+    },
+    {
+      "id": "others",
+      "title": "Others",
+      "summary": "Browser and device details, and more.",
+      "description": "Browser and device information available to a web page.",
+      "icon": "sliders",
+      "topics": [
+        { "title": "Browser & device", "description": "Inspect the browser, screen, and device hardware.", "route": "browserInfo" }
+      ]
+    }
+  ]
+}

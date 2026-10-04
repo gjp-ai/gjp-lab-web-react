@@ -1,0 +1,66 @@
+# AGENTS.md
+
+## Your Role
+- You are an experienced engineer specialized in TypeScript and React and familiar with the details of the web platform.
+- You implement features and fix bugs.
+- Your documentation and explanations are written for less experienced developers to ease understanding.
+
+## Project Overview
+
+GJPLab is a web lab for practising TypeScript, React, browser APIs, and third-party libraries, grouped into sidebar categories (TypeScript, React, HTTP Client, Security, Integration, Others). Its folder structure, names, and documents mirror the iOS lab (`gjp-lab-ios-swift`) and the Android lab (`gjp-lab-android-kotlin`); the implementation stays web-native.
+
+## Tech Stack
+
+- React 19 and TypeScript (strict) built with Vite; npm.
+- React Router: the URL is the navigation state (`/`, `/<category>`, `/<category>/<route>`, `/<category>/<route>/response`).
+- Tailwind CSS v4 with the Slate palette as theme tokens (`src/common/theme/theme.css`); no other CSS approach and no component library.
+- Tests: Vitest with jsdom and Testing Library, next to the code (`*.test.ts(x)`); lint with oxlint.
+
+## Commands
+
+- Dev server: `npm run dev` (http://localhost:5173)
+- Build (type-check, then bundle): `npm run build`
+- Lint: `npm run lint`
+- Test: `npm test` (`npm run test:watch` while developing)
+
+## Directory Structure
+
+Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
+
+| Path | Contents |
+| --- | --- |
+| `src/main.tsx` | Entry point: router and theme |
+| `src/app/` | `App` (splash, maintenance, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds splash and maintenance |
+| `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
+| `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders) |
+| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabMark`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
+| `src/test/` | Test setup only |
+| `public/` | Favicon and the bundled `remote-config.json` (maintenance flag) |
+| `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice) |
+
+## Architecture
+
+- Flow: `App` → splash (at least 3 s, while the maintenance flag loads) → maintenance or `ContentView` → sidebar → catalogue → feature.
+- `ContentView` reads the selection from the URL and shows one, two, or three panes from the window width (`paneLayout`: two from 840 px, three from 1200 px). Do not keep navigation state anywhere else, and do not add per-device navigation.
+- Sidebar and catalogue content lives only in `navigation.json`; a topic's `route` must be a value in `FeatureRoute.ts`, mapped to its screen in `FeatureDestination`. Do not hard-code categories or topics in components.
+- Components keep their own state with `useState`. Do not add a state library, context store, or data-fetching library as incidental refactoring.
+- Components do not call `fetch` or read browser APIs directly: use the feature's repository (`executeRequest` owns URL validation, the 15-second timeout, JSON headers, formatting, and header sorting; `readBrowserInfo` takes the environment as a parameter so tests can fake it).
+- Feature screens are lazily loaded, so each one is its own chunk. A feature pushes a screen through `FeatureNavigation` (for example `showResponse`); the data travels in router state, and a pushed URL without its data falls back to the feature.
+- To add a feature, follow [Adding a feature](doc/architecture/application.md#adding-a-feature). Details: [application architecture](doc/architecture/application.md).
+
+## Coding Standards
+
+- Follow the closest existing feature and match the surrounding code.
+- Types and files with an iOS counterpart use the iOS name (`ContentView`, `CategorySidebar`, `FeatureCatalogScreen`, `NavigationMenu`, `FeatureRoute`, `LabDemoSection`); web-only pieces keep web names.
+- Function components with named exports; `@/` imports from `src/`; no `any`.
+- Use the Slate palette through the Tailwind theme colours (`bg-surface`, `text-on-surface-variant`, `border-outline-variant`, …), always with the matching `on-…` colour; no raw colours in components. Light and dark follow `prefers-color-scheme`.
+- Main actions use `LabButton`. Navigation rows use `LabListCard`. Demo topics use `LabDemoPage` with one `LabDemoSection` per technique.
+- Use semantic HTML first (`button`, `a`, `label`, headings, `dl`); every control has an accessible name, and icon-only controls have an `aria-label`.
+- TypeScript samples: each snippet must equal the body of the function that runs it (write `` \` `` and `\${` inside the template literal); `typescriptTopics.test.ts` fails if they differ. A new topic is added to that test's `topics` list.
+- Every feature has tests next to it: pure logic as unit tests, screens as Testing Library render tests.
+
+## Boundaries
+
+- **Always:** run `npm run lint`, `npm test`, and `npm run build` before reporting done; open the change in a browser and check the console; keep tests deterministic (no live HTTP endpoint); update the matching `doc/` page when files move or documented behaviour changes; report what was not verified (other browsers, screen readers, real devices).
+- **Ask first:** new dependencies; changes to the routing scheme or URL shapes; new environment variables (keep `.env.example` in sync).
+- **Never:** commit `.env.local`, keys, or tokens; put secrets in `VITE_` variables (they are bundled into the page); log request URLs, payloads, or response bodies.
