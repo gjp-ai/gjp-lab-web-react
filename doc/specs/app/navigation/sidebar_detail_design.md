@@ -32,7 +32,7 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 
 | Layout | Window and pointer | Panes |
 | --- | --- | --- |
-| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px) │ feature, catalogue, or placeholder |
+| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px) │ feature, catalogue, or placeholder, with content up to 1120 px wide (720 px in the other layouts) |
 | `three` | ≥ 1200 px, touch | Sidebar (320 px) │ catalogue or placeholder (360 px) │ feature or placeholder |
 | `two` | 840–1199 px, touch | Sidebar, or catalogue with a back link (360 px) │ feature or placeholder |
 | `single` | < 840 px, any pointer | The deepest selected level, with a back link to its parent |

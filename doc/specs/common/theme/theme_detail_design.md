@@ -33,7 +33,7 @@ GJPLab uses a restrained, high-contrast Slate direction based on black, white, n
 
 ## Layout
 
-Every pane uses the `background` canvas with its content limited to 720 px and centred. Panes are separated by 1 px `outline-variant` dividers. See the [sidebar detailed design](../../app/navigation/sidebar_detail_design.md) for the breakpoints.
+Every pane uses the `background` canvas with its content limited to 720 px and centred; beside the desktop tree sidebar the content may grow to 1120 px. Panes are separated by 1 px `outline-variant` dividers. See the [sidebar detailed design](../../app/navigation/sidebar_detail_design.md) for the breakpoints.
 
 ## Accessibility and review checklist
 

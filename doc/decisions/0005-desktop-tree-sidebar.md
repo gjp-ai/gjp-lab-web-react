@@ -9,7 +9,7 @@ Decision 0003 chose the layout from the window width alone, so a 1440 px desktop
 ## Decision
 
 - `paneLayout(windowWidth, hasFinePointer)` adds a fourth layout, `sidebar`, used from 840 px when the primary pointer is a mouse or trackpad (`(hover: hover) and (pointer: fine)`, read by `useFinePointer`).
-- The `sidebar` layout shows one 288 px `NavigationTree` (every category as a group that opens and closes, with its topics as compact links) next to the content. The content pane shows the feature; at `/<category>` it shows the catalogue as an overview; at `/` it says "Choose a topic".
+- The `sidebar` layout shows one 288 px `NavigationTree` (every category as a group that opens and closes, with its topics as compact links) next to the content, whose width limit rises from 720 px to 1120 px. The content pane shows the feature; at `/<category>` it shows the catalogue as an overview; at `/` it says "Choose a topic".
 - Touch screens keep the 0003 layouts: one stack below 840 px, two panes from 840 px, three from 1200 px. Every window below 840 px uses the stack, whatever the pointer.
 - URLs, fallbacks, and Back behaviour are unchanged.
 

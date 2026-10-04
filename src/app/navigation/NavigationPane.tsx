@@ -2,19 +2,22 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 
 /**
- * One navigation pane: a header with the title and an optional back link, above content limited to
- * 720 px and centred. Each pane scrolls on its own.
+ * One navigation pane: a header with the title and an optional back link, above centred content limited
+ * to 720 px, or 1120 px when `isWide` (the desktop content area). Each pane scrolls on its own.
  */
 export function NavigationPane({
   title,
   backTo,
   className = '',
+  isWide = false,
   children,
 }: {
   title: string
   /** The parent URL; shown as a back arrow when the parent pane is not visible. */
   backTo?: string
   className?: string
+  /** Lets the content use up to 1120 px, for the large content area beside the desktop tree. */
+  isWide?: boolean
   children: ReactNode
 }) {
   return (
@@ -34,7 +37,7 @@ export function NavigationPane({
         <h1 className={'truncate text-[22px] ' + (backTo === undefined ? 'pl-3' : '')}>{title}</h1>
       </header>
       <div className="min-h-0 flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-[720px]">{children}</div>
+        <div className={'mx-auto w-full ' + (isWide ? 'max-w-[1120px]' : 'max-w-[720px]')}>{children}</div>
       </div>
     </section>
   )

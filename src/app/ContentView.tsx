@@ -61,8 +61,11 @@ function Panes() {
     </NavigationPane>
   )
 
+  // Beside the desktop tree the content pane is large, so its content may grow wider.
+  const isWide = layout === 'sidebar'
+
   const catalog = (shown: NavigationCategory, showBack: boolean, className?: string) => (
-    <NavigationPane title={shown.title} backTo={showBack ? '/' : undefined} className={className}>
+    <NavigationPane title={shown.title} backTo={showBack ? '/' : undefined} className={className} isWide={isWide}>
       <FeatureCatalogScreen category={shown} selectedRoute={selectedRoute} />
     </NavigationPane>
   )
@@ -70,11 +73,11 @@ function Panes() {
   // The pushed response replaces the feature in its pane; Back returns to the feature.
   const feature = (shown: FeatureRoute, showBack: boolean, className?: string) =>
     response !== undefined && params.detail === 'response' ? (
-      <NavigationPane title="Response" backTo={`/${category!.id}/${shown}`} className={className}>
+      <NavigationPane title="Response" backTo={`/${category!.id}/${shown}`} className={className} isWide={isWide}>
         <ResponseDestination response={response} />
       </NavigationPane>
     ) : (
-      <NavigationPane title={findTopic(shown)?.title ?? shown} backTo={showBack ? `/${category!.id}` : undefined} className={className}>
+      <NavigationPane title={findTopic(shown)?.title ?? shown} backTo={showBack ? `/${category!.id}` : undefined} className={className} isWide={isWide}>
         <FeatureDestination route={shown} navigation={navigation} />
       </NavigationPane>
     )
