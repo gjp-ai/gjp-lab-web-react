@@ -59,13 +59,13 @@ src/
 ├── common/       config/, theme/ (Slate tokens, LabButton, LabDemoPage), codesample/
 └── test/         test setup
 public/           favicon and remote-config.json
-doc/              architecture/, decisions/, templates/, and specs/ (mirrors src/)
+doc/              architecture/, decisions/, guides/, templates/, and specs/ (mirrors src/)
 ```
 
 ## Documentation
 
-Start with the [documentation index](doc/README.md). Project-wide docs live in `doc/architecture/`; each screen's requirement and detailed design live in `doc/specs/` at the same path as its code, for example [`doc/specs/features/httpclient/fetch/`](doc/specs/features/httpclient/fetch/).
+Start with the [documentation index](doc/README.md). New to TypeScript or React? The [TypeScript tutorial](doc/guides/typescript_tutorial.md) and [React tutorial](doc/guides/react_tutorial.md) teach both from this project's code. Project-wide docs live in `doc/architecture/`; each screen's requirement and detailed design live in `doc/specs/` at the same path as its code, for example [`doc/specs/features/httpclient/fetch/`](doc/specs/features/httpclient/fetch/).
 
 ## Working with coding agents
 
-[`AGENTS.md`](AGENTS.md) holds the project rules, commands, and conventions. Codex and other agents read it directly; [`CLAUDE.md`](CLAUDE.md) imports it for Claude Code.
+[`AGENTS.md`](AGENTS.md) holds the project rules, commands, and conventions for coding agents. It is the only agent instruction file in this repository, so keep any agent guidance there.

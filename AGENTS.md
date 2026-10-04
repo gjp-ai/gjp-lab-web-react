@@ -36,7 +36,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabTabs`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
 | `src/test/` | Test setup only |
 | `public/` | Favicon and the bundled `remote-config.json` (maintenance flag) |
-| `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice) |
+| `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice); `guides/` for learning material (update `guides/typescript_tutorial.md` and `guides/react_tutorial.md` when code they quote changes) |
 
 ## Architecture
 

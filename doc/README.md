@@ -8,11 +8,13 @@ This directory documents the web lab as it exists today and the behaviour it is 
 - `specs/` mirrors `src/` exactly: the docs for `src/<path>/` live in `doc/specs/<path>/`.
 - `templates/` holds the starting point for new requirement and detail design documents.
 - `decisions/` records project choices the code alone does not explain, and why they were made.
+- `guides/` holds learning material: TypeScript and React tutorials built from this project's code.
 
 ```
 doc/
 ├── architecture/application.md           project-wide
 ├── decisions/                            0001-….md, one per decision
+├── guides/                               typescript_tutorial.md, react_tutorial.md
 ├── templates/                            requirement.md, detail_design.md
 └── specs/                                mirrors src/
     ├── app/startup/                      ↔ src/app/startup/
@@ -42,6 +44,7 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | --- | --- | --- |
 | Agent contract | [`AGENTS.md`](../AGENTS.md): project rules, commands, and conventions | — |
 | Application structure | — | [Application architecture](architecture/application.md) |
+| Learning | [TypeScript tutorial](guides/typescript_tutorial.md) and [React tutorial](guides/react_tutorial.md): the language and UI features this project uses, with exercises | — |
 | Visual system | — | [Slate design system](specs/common/theme/theme_detail_design.md) |
 | Runnable code sample | — | [Code sample detailed design](specs/common/codesample/codesample_detail_design.md) (used by the TypeScript topics) |
 | Decisions | [Decision records](decisions/README.md): why the project is shaped the way it is | — |
@@ -77,6 +80,7 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 
 ## Reading paths
 
+- **New to TypeScript or React:** [TypeScript tutorial](guides/typescript_tutorial.md) → [React tutorial](guides/react_tutorial.md) → application architecture.
 - **New contributor:** application architecture → feature requirement and detailed design → related TypeScript sources.
 - **Product or QA:** requirements → acceptance criteria → implementation status and known gaps in the detailed design.
 - **Implementation agent:** [`AGENTS.md`](../AGENTS.md) → relevant design and requirement documents.
@@ -89,7 +93,7 @@ Each fact has one owner:
 - Detailed designs explain how the current implementation satisfies—or does not yet satisfy—requirements.
 - Architecture documents stable project-wide boundaries and links to feature details instead of duplicating them.
 
-Use repository-relative links and short symbol references rather than copied implementations.
+Use repository-relative links and short symbol references rather than copied implementations. Guides are the exception: they quote code in order to teach it, so a change to quoted code updates the guide in the same change.
 
 ## Status language
 

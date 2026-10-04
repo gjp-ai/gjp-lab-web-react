@@ -17,7 +17,7 @@ The first plan for this project (in an earlier `CLAUDE.md`) used `src/labs/<cate
 ## Consequences
 
 - One folder shows everything a feature needs, including its tests, and the same path finds its docs in all three labs.
-- `AGENTS.md` replaces the old `CLAUDE.md` plan; `CLAUDE.md` now imports `AGENTS.md`.
+- `AGENTS.md` replaces the old `CLAUDE.md` plan and is the only agent instruction file.
 - Tests sit next to the code (`*.test.ts(x)`), the web convention, rather than in separate test targets.
 
 Related: iOS decision 0002 and Android decision 0001 make the same choice.
