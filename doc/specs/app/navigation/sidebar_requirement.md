@@ -22,7 +22,7 @@ Give users one starting point that lists every lab category, and leads to its to
 ## Behavior
 
 - Every level has a URL: `/` (categories), `/<category>`, `/<category>/<topic route>`, and `/<category>/<topic route>/response` for a pushed screen. Reloading or sharing a URL opens the same screen.
-- **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or "Choose a topic" at `/`.
+- **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or "Choose a topic" at `/`. The sidebar collapses to a narrow rail of category icons with its header button or the `[` key, and the browser remembers the choice; a rail icon reopens the sidebar on that category.
 - **1200 px and wider on a touch screen:** categories, catalogue, and feature side by side; empty panes say "Choose a category" or "Choose a topic".
 - **840 px to under 1200 px on a touch screen:** two panes: categories, or the catalogue with a back link, then the feature.
 - **Under 840 px, any pointer:** one level at a time with a back link; the browser's Back button also moves up.
@@ -56,6 +56,7 @@ Give users one starting point that lists every lab category, and leads to its to
 | SDB-AC-05 | Open `/typescript/notATopic` | The TypeScript catalogue opens. |
 | SDB-AC-06 | Keyboard only | Tab reaches every row, and Enter opens it. |
 | SDB-AC-07 | Desktop browser at 1400 px: open a topic, then open and close another category | A tree sidebar and the feature; the selected topic is marked, and groups open and close with `aria-expanded`. |
+| SDB-AC-08 | Desktop browser: collapse the sidebar, reload, then click a rail icon | The rail stays after the reload; the icon reopens the sidebar with that category open. `[` toggles it, except while typing in a field. |
 
 ## Technical implementation constraints
 

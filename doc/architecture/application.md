@@ -32,7 +32,7 @@ flowchart LR
 | --- | --- |
 | `src/app/` | `App` (startup phases), `ContentView` (routes and panes), and `FeatureDestination` (maps a `FeatureRoute` to its lazily loaded screen) |
 | `src/app/startup/` | Splash and maintenance screens, and `fetchMaintenanceMode` |
-| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `NavigationTree`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
+| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `DesktopSidebar`, `NavigationTree`, `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
 | `src/features/<category>/<feature>/` | Feature screens, repositories, models, and their tests |
 | `src/common/config/` | Stable application behaviour constants (`AppConfig`) |
 | `src/common/theme/` | Slate tokens (`theme.css`), `LabButton`, `LabListCard`, `LabDemoPage` and `LabDemoSection`, and `LabMark` |

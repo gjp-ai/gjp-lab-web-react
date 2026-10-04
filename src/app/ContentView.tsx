@@ -6,7 +6,7 @@ import { FeatureCatalogScreen } from './navigation/FeatureCatalogScreen'
 import { type FeatureRoute, isFeatureRoute } from './navigation/FeatureRoute'
 import { findCategory, findTopic, navigationMenu, type NavigationCategory } from './navigation/NavigationMenu'
 import { NavigationPane, NavigationPlaceholder } from './navigation/NavigationPane'
-import { NavigationTree } from './navigation/NavigationTree'
+import { DesktopSidebar } from './navigation/DesktopSidebar'
 import { paneLayout, useFinePointer, useWindowWidth } from './navigation/paneLayout'
 
 /**
@@ -93,9 +93,7 @@ function Panes() {
   if (layout === 'sidebar') {
     return (
       <div className="flex h-full">
-        <NavigationPane title="GJP Lab" className="w-72 shrink-0">
-          <NavigationTree categories={navigationMenu.categories} selectedCategoryId={category?.id} selectedRoute={selectedRoute} />
-        </NavigationPane>
+        <DesktopSidebar categories={navigationMenu.categories} selectedCategoryId={category?.id} selectedRoute={selectedRoute} />
         {divider}
         {selectedRoute !== undefined
           ? feature(selectedRoute, false, 'flex-1')

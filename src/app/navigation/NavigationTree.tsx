@@ -6,19 +6,22 @@ import type { NavigationCategory } from './NavigationMenu'
 
 /**
  * The desktop sidebar: every category as a group that opens and closes, with its topics as compact
- * links underneath. The selected category opens on its own, so the selected topic is always visible.
+ * links underneath. The selected category opens on its own, so the selected topic is always visible;
+ * `openCategoryId` also opens a category when the tree first appears (a rail icon of the collapsed sidebar).
  */
 export function NavigationTree({
   categories,
   selectedCategoryId,
   selectedRoute,
+  openCategoryId,
 }: {
   categories: NavigationCategory[]
   selectedCategoryId?: string
   selectedRoute?: FeatureRoute
+  openCategoryId?: string
 }) {
   const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(
-    () => new Set(selectedCategoryId === undefined ? [] : [selectedCategoryId]),
+    () => new Set([selectedCategoryId, openCategoryId].filter((id) => id !== undefined)),
   )
   // Open a newly selected category (for example after Back or a pasted link) while rendering, not in an effect.
   const [openedFor, setOpenedFor] = useState(selectedCategoryId)

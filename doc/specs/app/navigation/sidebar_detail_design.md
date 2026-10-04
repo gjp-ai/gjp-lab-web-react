@@ -14,7 +14,9 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 | --- | --- |
 | [`ContentView.tsx`](../../../../src/app/ContentView.tsx) | Routes, URL validation and fallbacks, pane layout, and `FeatureNavigation` |
 | [`paneLayout.ts`](../../../../src/app/navigation/paneLayout.ts) | `paneLayout` breakpoints, `useWindowWidth`, and `useFinePointer` |
+| [`DesktopSidebar.tsx`](../../../../src/app/navigation/DesktopSidebar.tsx) | Desktop sidebar: the tree, or the collapsed icon rail; the hide/show button and `[` shortcut |
 | [`NavigationTree.tsx`](../../../../src/app/navigation/NavigationTree.tsx) | Desktop tree sidebar: category groups and topic links |
+| [`sidebarPreference.ts`](../../../../src/app/navigation/sidebarPreference.ts) | Remembers the collapsed state in local storage; recognises the `[` shortcut |
 | [`NavigationPane.tsx`](../../../../src/app/navigation/NavigationPane.tsx) | `NavigationPane` (header, back link, scrolling width-limited content) and `NavigationPlaceholder` |
 | [`CategorySidebar.tsx`](../../../../src/app/navigation/CategorySidebar.tsx) | Category list |
 | [`CategoryIcon.tsx`](../../../../src/app/navigation/CategoryIcon.tsx) | Inline icons in a tinted tile |
@@ -32,7 +34,7 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 
 | Layout | Window and pointer | Panes |
 | --- | --- | --- |
-| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px) │ feature, catalogue, or placeholder, with content up to 1120 px wide (720 px in the other layouts) |
+| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px), or the 56 px icon rail when collapsed │ feature, catalogue, or placeholder, with content up to 1120 px wide (720 px in the other layouts) |
 | `three` | ≥ 1200 px, touch | Sidebar (320 px) │ catalogue or placeholder (360 px) │ feature or placeholder |
 | `two` | 840–1199 px, touch | Sidebar, or catalogue with a back link (360 px) │ feature or placeholder |
 | `single` | < 840 px, any pointer | The deepest selected level, with a back link to its parent |
@@ -45,6 +47,10 @@ Each sidebar row is a `LabListCard` link: a `surface` card with 18 px corners, a
 
 In the desktop tree, each category is a `button` with `aria-expanded` and `aria-controls`, a chevron, a 28 px icon tile, and its title. Its topics are a nested list of compact links (14 px text, 2 px left bar in `primary` plus bold text when selected, `surface-container` on hover) with the topic description as a tooltip; planned topics are plain text marked "Planned". Open groups are local state; a newly selected category is added while rendering.
 
+### Collapsing
+
+The tree header ends with a "Hide sidebar" button; the collapsed sidebar is a 56 px `nav` ("Categories") with a "Show sidebar" button and one 40 px button per category ("Show <category> topics", `aria-current` on the selected one, a `primary` border). A rail button opens the sidebar with that category's group open. The `[` key toggles the sidebar unless a modifier is held or focus is in an `input`, `textarea`, `select`, or editable element; both toggle buttons carry `aria-keyshortcuts="["`. After a toggle, focus moves to the new toggle button. The state is saved under `gjpLab.sidebarCollapsed` in local storage; when storage is blocked the sidebar starts expanded and the choice lasts for the page view only. Touch layouts have no collapse.
+
 ## Known gaps
 
 | Gap | Effect | Suggested fix |
@@ -55,5 +61,5 @@ In the desktop tree, each category is a `button` with `aria-expanded` and `aria-
 
 ## Verification
 
-- Automated: `ContentView.test.tsx` (phone stack with Back, three panes with `aria-current`, the desktop tree with opening groups and the catalogue overview, the medium placeholder, planned topics without links, unknown-URL fallback, pushed URL without data); `paneLayout.test.ts`; `NavigationMenu.test.ts`.
-- Manual: SDB-AC-01 to SDB-AC-07 in Chrome and Safari at 375, 1000, and 1400 px, on a desktop and an iPad, keyboard only, in light and dark mode.
+- Automated: `ContentView.test.tsx` (phone stack with Back, three panes with `aria-current`, the desktop tree with opening groups and the catalogue overview, collapsing to the rail and back with the button and `[` key, the medium placeholder, planned topics without links, unknown-URL fallback, pushed URL without data); `paneLayout.test.ts`; `sidebarPreference.test.ts`; `NavigationMenu.test.ts`.
+- Manual: SDB-AC-01 to SDB-AC-08 in Chrome and Safari at 375, 1000, and 1400 px, on a desktop and an iPad, keyboard only, in light and dark mode.

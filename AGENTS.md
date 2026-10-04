@@ -31,7 +31,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | --- | --- |
 | `src/main.tsx` | Entry point: router and theme |
 | `src/app/` | `App` (splash, maintenance, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds splash and maintenance |
-| `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `NavigationTree` (desktop sidebar), `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
+| `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `DesktopSidebar` and `NavigationTree` (desktop sidebar, collapsible to an icon rail), `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
 | `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders) |
 | `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabMark`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
 | `src/test/` | Test setup only |

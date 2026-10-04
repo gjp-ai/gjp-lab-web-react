@@ -25,6 +25,7 @@ function withMouse() {
 afterEach(() => {
   window.innerWidth = 1024
   vi.unstubAllGlobals()
+  window.localStorage.clear()
 })
 
 describe('ContentView', () => {
@@ -101,5 +102,44 @@ describe('ContentView', () => {
     renderAt('/others', 1000)
     expect(screen.getByRole('heading', { level: 1, name: 'Others' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Others' })).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('collapses the desktop sidebar to a rail of icons and remembers the choice', async () => {
+    withMouse()
+    const user = userEvent.setup()
+    const { unmount } = renderAt('/typescript/typescriptBasics', 1400)
+
+    await user.click(screen.getByRole('button', { name: 'Hide sidebar' }))
+    expect(screen.queryByRole('heading', { level: 1, name: 'GJP Lab' })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show sidebar' })).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Show TypeScript topics' })).toHaveAttribute('aria-current', 'true')
+
+    // The choice survives a reload.
+    unmount()
+    renderAt('/typescript/typescriptBasics', 1400)
+    expect(screen.getByRole('navigation', { name: 'Categories' })).toBeInTheDocument()
+
+    // A rail icon opens the sidebar with that category's topics showing.
+    await user.click(screen.getByRole('button', { name: 'Show React topics' }))
+    expect(screen.getByRole('heading', { level: 1, name: 'GJP Lab' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'React' })).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('button', { name: 'Hide sidebar' })).toHaveFocus()
+  })
+
+  it('toggles the desktop sidebar with the [ key, but not while typing', async () => {
+    withMouse()
+    const user = userEvent.setup()
+    renderAt('/httpClient/fetch', 1400)
+    const url = await screen.findByRole('textbox', { name: /url/i })
+
+    // user-event writes a literal [ as [[.
+    await user.type(url, '[[')
+    expect(screen.getByRole('button', { name: 'Hide sidebar' })).toBeInTheDocument()
+
+    await user.click(document.body)
+    await user.keyboard('[[')
+    expect(screen.getByRole('button', { name: 'Show sidebar' })).toBeInTheDocument()
+    await user.keyboard('[[')
+    expect(screen.getByRole('button', { name: 'Hide sidebar' })).toBeInTheDocument()
   })
 })
