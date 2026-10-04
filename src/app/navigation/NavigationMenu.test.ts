@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { featureRoutes } from './FeatureRoute'
-import { findCategory, findTopic, navigationMenu, parseNavigationMenu } from './NavigationMenu'
+import { findCategory, findCategoryOfRoute, findTopic, navigationMenu, parseNavigationMenu } from './NavigationMenu'
 
 describe('navigation.json', () => {
   it('decodes with unique category ids and topic titles', () => {
@@ -34,6 +34,17 @@ describe('navigation.json', () => {
     expect(findCategory('httpClient')?.title).toBe('HTTP Client')
     expect(findCategory('missing')).toBeUndefined()
     for (const route of featureRoutes) expect(findTopic(route)?.route).toBe(route)
+  })
+
+  it('features listed topics only, each once', () => {
+    expect(navigationMenu.featured.length).toBeGreaterThan(0)
+    expect(new Set(navigationMenu.featured).size).toBe(navigationMenu.featured.length)
+    for (const route of navigationMenu.featured) expect(findCategoryOfRoute(route), route).toBeDefined()
+    const json = {
+      featured: ['fetch'],
+      categories: [{ id: 'x', title: 'X', summary: '', description: '', icon: 'code', topics: [{ title: 'T', description: '' }] }],
+    }
+    expect(() => parseNavigationMenu(json)).toThrow('featured route "fetch" is not a listed topic')
   })
 
   it('puts TypeScript first, like Swift on iOS', () => {

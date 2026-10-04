@@ -10,6 +10,7 @@ The sidebar and catalogue need each category's title, summary, description, and 
 
 - All categories and topics, in display order, live in `src/app/navigation/navigation.json`, parsed by `parseNavigationMenu` in `NavigationMenu.ts`.
 - A topic's optional `"route"` must be a value in `featureRoutes` (`FeatureRoute.ts`). A topic without a route is shown as planned. An icon must be one of the names `CategoryIcon` can draw.
+- A top-level `"featured"` list names the routes the home page offers as quick links; each must be a listed topic.
 - The mapping from route to screen stays in TypeScript, in `FeatureDestination`. The JSON never names a component.
 - The bundled JSON is trusted app content: if it is invalid, parsing throws with a clear message when the app loads.
 

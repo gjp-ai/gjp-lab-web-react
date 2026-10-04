@@ -17,6 +17,8 @@ doc/
 └── specs/                                mirrors src/
     ├── app/startup/                      ↔ src/app/startup/
     │   └── maintenance_requirement.md / maintenance_detail_design.md
+    ├── app/home/                         ↔ src/app/home/
+    │   └── home_requirement.md / home_detail_design.md
     ├── app/navigation/                   ↔ src/app/navigation/
     │   ├── sidebar_requirement.md / sidebar_detail_design.md   (sidebar and pane layout)
     │   └── catalog_requirement.md / catalog_detail_design.md
@@ -44,6 +46,7 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | Runnable code sample | — | [Code sample detailed design](specs/common/codesample/codesample_detail_design.md) (used by the TypeScript topics) |
 | Decisions | [Decision records](decisions/README.md): why the project is shaped the way it is | — |
 | Maintenance (startup) | [Maintenance requirement](specs/app/startup/maintenance_requirement.md) | [Maintenance detailed design](specs/app/startup/maintenance_detail_design.md) |
+| Home page | [Home requirement](specs/app/home/home_requirement.md) | [Home detailed design](specs/app/home/home_detail_design.md) |
 | Category sidebar and panes | [Sidebar requirement](specs/app/navigation/sidebar_requirement.md) | [Sidebar detailed design](specs/app/navigation/sidebar_detail_design.md) |
 | Category catalogue | [Catalogue requirement](specs/app/navigation/catalog_requirement.md) | [Catalogue detailed design](specs/app/navigation/catalog_detail_design.md) |
 | TypeScript → Values & types | [Requirement](specs/features/typescript/basics/basics_requirement.md) | [Detailed design](specs/features/typescript/basics/basics_detail_design.md) |

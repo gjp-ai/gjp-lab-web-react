@@ -1,4 +1,5 @@
 {
+  "featured": ["typescriptBasics", "reactState", "reactTransitions", "fetch", "axios", "browserInfo"],
   "categories": [
     {
       "id": "typescript",

@@ -26,6 +26,8 @@ export interface NavigationCategory {
 
 export interface NavigationMenu {
   categories: NavigationCategory[]
+  /** Topics the home page offers as quick links, in order; each is a route listed in a category. */
+  featured: FeatureRoute[]
 }
 
 /**
@@ -70,7 +72,14 @@ export function parseNavigationMenu(raw: unknown): NavigationMenu {
       topics,
     }
   })
-  return { categories }
+  const listed = new Set(categories.flatMap((category) => category.topics.flatMap((topic) => (topic.route ? [topic.route] : []))))
+  const rawFeatured = (raw as { featured?: unknown }).featured ?? []
+  if (!Array.isArray(rawFeatured)) fail('"featured" must be a list of routes')
+  const featured = (rawFeatured as unknown[]).map((route): FeatureRoute => {
+    if (typeof route !== 'string' || !isFeatureRoute(route) || !listed.has(route)) fail(`featured route "${String(route)}" is not a listed topic`)
+    return route as FeatureRoute
+  })
+  return { categories, featured }
 }
 
 /** The app's menu, read once from the bundled navigation.json. */
@@ -78,6 +87,11 @@ export const navigationMenu: NavigationMenu = parseNavigationMenu(navigationJson
 
 export function findCategory(id: string | undefined): NavigationCategory | undefined {
   return navigationMenu.categories.find((category) => category.id === id)
+}
+
+/** The category that lists `route`, used to build a topic's URL. */
+export function findCategoryOfRoute(route: FeatureRoute): NavigationCategory | undefined {
+  return navigationMenu.categories.find((category) => category.topics.some((topic) => topic.route === route))
 }
 
 /** The topic that carries `route`, used for the feature pane's title. */

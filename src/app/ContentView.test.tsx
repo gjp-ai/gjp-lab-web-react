@@ -54,6 +54,23 @@ describe('ContentView', () => {
     expect(screen.getByRole('link', { name: /^React:/ })).toHaveAttribute('aria-current', 'page')
   })
 
+  it('opens on the home page in every layout', () => {
+    renderAt('/', 400)
+    expect(screen.getByRole('heading', { level: 1, name: 'GJP Lab' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Start here' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Dark mode' })).toBeInTheDocument()
+  })
+
+  it('shows the home page beside the sidebar on wide windows', () => {
+    renderAt('/', 1400)
+    expect(screen.getByRole('heading', { level: 1, name: 'Home' })).toBeInTheDocument()
+    expect(screen.queryByText('Choose a category')).not.toBeInTheDocument()
+
+    withMouse()
+    renderAt('/', 1400)
+    expect(screen.getAllByRole('heading', { level: 1, name: 'Home' })).toHaveLength(2)
+  })
+
   it('prompts for a topic before one is chosen on a medium window', () => {
     renderAt('/others', 1000)
     expect(screen.getByRole('heading', { level: 1, name: 'Others' })).toBeInTheDocument()

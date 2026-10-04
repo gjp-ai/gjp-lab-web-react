@@ -34,10 +34,10 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 
 | Layout | Window and pointer | Panes |
 | --- | --- | --- |
-| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px), or the 56 px icon rail when collapsed │ feature, catalogue, or placeholder, with content up to 1120 px wide (720 px in the other layouts) |
-| `three` | ≥ 1200 px, touch | Sidebar (320 px) │ catalogue or placeholder (360 px) │ feature or placeholder |
-| `two` | 840–1199 px, touch | Sidebar, or catalogue with a back link (360 px) │ feature or placeholder |
-| `single` | < 840 px, any pointer | The deepest selected level, with a back link to its parent |
+| `sidebar` | ≥ 840 px, mouse or trackpad (`(hover: hover) and (pointer: fine)`) | `NavigationTree` (288 px), or the 56 px icon rail when collapsed │ feature, catalogue, or home page, with content up to 1120 px wide (720 px in the other layouts) |
+| `three` | ≥ 1200 px, touch | Sidebar (320 px) │ catalogue (360 px) │ feature or placeholder; at `/`, sidebar │ home page |
+| `two` | 840–1199 px, touch | Sidebar (360 px) │ home page, or catalogue with a back link (360 px) │ feature or placeholder |
+| `single` | < 840 px, any pointer | The deepest selected level, with a back link to its parent; the home page at `/` |
 
 Back links are ordinary `Link`s to the parent URL, so they and the browser's Back button agree. Each pane scrolls on its own; the page itself never scrolls.
 

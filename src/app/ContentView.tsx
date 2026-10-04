@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useParams } from 'react-router'
 import { ColorSchemeToggle } from '@/common/theme/ColorSchemeToggle'
 import { FeatureDestination } from './FeatureDestination'
+import { HomeScreen } from './home/HomeScreen'
 import { CategorySidebar } from './navigation/CategorySidebar'
 import { FeatureCatalogScreen } from './navigation/FeatureCatalogScreen'
 import { type FeatureRoute, isFeatureRoute } from './navigation/FeatureRoute'
@@ -65,9 +66,16 @@ function Panes() {
     </NavigationPane>
   )
 
+  // The home page at `/`. On a phone it is the first screen, so it carries the app title and the theme toggle.
+  const home = (title: string, className?: string) => (
+    <NavigationPane title={title} className={className} isWide={isWide} headerAction={title === 'GJP Lab' ? <ColorSchemeToggle /> : undefined}>
+      <HomeScreen />
+    </NavigationPane>
+  )
+
   const featureOrPlaceholder = (className: string) => {
     if (selectedRoute !== undefined) return feature(selectedRoute, false, className)
-    return <NavigationPlaceholder text={category === undefined ? 'Choose a category' : 'Choose a topic'} className={className} />
+    return <NavigationPlaceholder text="Choose a topic" className={className} />
   }
 
   const divider = <div className="w-px shrink-0 bg-outline-variant" aria-hidden="true" />
@@ -82,7 +90,7 @@ function Panes() {
           ? feature(selectedRoute, false, 'flex-1')
           : category !== undefined
             ? catalog(category, false, 'flex-1')
-            : <NavigationPlaceholder text="Choose a topic" className="flex-1" />}
+            : home('Home', 'flex-1')}
       </div>
     )
   }
@@ -92,9 +100,15 @@ function Panes() {
       <div className="flex h-full">
         {sidebar('w-80 shrink-0')}
         {divider}
-        {category !== undefined ? catalog(category, false, 'w-90 shrink-0') : <NavigationPlaceholder text="Choose a category" className="w-90 shrink-0" />}
-        {divider}
-        {featureOrPlaceholder('flex-1')}
+        {category !== undefined ? (
+          <>
+            {catalog(category, false, 'w-90 shrink-0')}
+            {divider}
+            {featureOrPlaceholder('flex-1')}
+          </>
+        ) : (
+          home('Home', 'flex-1')
+        )}
       </div>
     )
   }
@@ -104,12 +118,12 @@ function Panes() {
       <div className="flex h-full">
         {category !== undefined ? catalog(category, true, 'w-90 shrink-0') : sidebar('w-90 shrink-0')}
         {divider}
-        {featureOrPlaceholder('flex-1')}
+        {category !== undefined ? featureOrPlaceholder('flex-1') : home('Home', 'flex-1')}
       </div>
     )
   }
 
   if (selectedRoute !== undefined) return feature(selectedRoute, true)
   if (category !== undefined) return catalog(category, true)
-  return sidebar()
+  return home('GJP Lab')
 }

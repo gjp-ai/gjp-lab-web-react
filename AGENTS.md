@@ -30,7 +30,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | Path | Contents |
 | --- | --- |
 | `src/main.tsx` | Entry point: router and theme |
-| `src/app/` | `App` (maintenance check, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds maintenance |
+| `src/app/` | `App` (maintenance check, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `home/` holds the home page at `/`; `startup/` holds maintenance |
 | `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `DesktopSidebar` and `NavigationTree` (desktop sidebar, collapsible to an icon rail), `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
 | `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders); `src/features/httpclient/shared/` holds the page, examples, and helpers that fetch and axios share |
 | `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabTabs`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
@@ -40,9 +40,9 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 
 ## Architecture
 
-- Flow: `App` reads the maintenance flag (no splash) → maintenance or `ContentView` → sidebar → catalogue → feature.
+- Flow: `App` reads the maintenance flag (no splash) → maintenance or `ContentView` → home page (with the sidebar on wide windows) → catalogue → feature.
 - `ContentView` reads the selection from the URL and picks a layout with `paneLayout`: one stack below 840 px; from 840 px, a tree sidebar beside the content when the primary pointer is a mouse, otherwise two panes (three from 1200 px). Do not keep navigation state anywhere else, and choose layouts with media features (width, pointer), never the user agent.
-- Sidebar and catalogue content lives only in `navigation.json`; a topic's `route` must be a value in `FeatureRoute.ts`, mapped to its screen in `FeatureDestination`. Do not hard-code categories or topics in components.
+- Sidebar, catalogue, and home page content (including the home page's `featured` topics) lives only in `navigation.json`; a topic's `route` must be a value in `FeatureRoute.ts`, mapped to its screen in `FeatureDestination`. Do not hard-code categories or topics in components.
 - Components keep their own state with `useState`. Do not add a state library, context store, or data-fetching library as incidental refactoring.
 - Components do not call `fetch` or read browser APIs directly: use the feature's repository (`executeRequest` and `executeAxiosRequest` own the timeout, cancellation, and errors, using the shared `httpRequest` helpers for URL validation, JSON headers, and formatting; `readBrowserInfo` takes the environment as a parameter so tests can fake it).
 - Feature screens are lazily loaded, so each one is its own chunk, and take no props from the app. A feature shows results in place (the fetch response appears under its form); deeper URLs open their topic ([decision 0007](doc/decisions/0007-inline-fetch-response.md)).

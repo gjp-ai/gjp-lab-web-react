@@ -21,11 +21,11 @@ Give users one starting point that lists every lab category, and leads to its to
 
 ## Behavior
 
-- Every level has a URL: `/` (categories), `/<category>`, and `/<category>/<topic route>`; a deeper URL opens its topic. Reloading or sharing a URL opens the same screen.
-- **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or "Choose a topic" at `/`. The sidebar collapses to a narrow rail of category icons with its header button or the `[` key, and the browser remembers the choice; a rail icon reopens the sidebar on that category.
-- **1200 px and wider on a touch screen:** categories, catalogue, and feature side by side; empty panes say "Choose a category" or "Choose a topic".
-- **840 px to under 1200 px on a touch screen:** two panes: categories, or the catalogue with a back link, then the feature.
-- **Under 840 px, any pointer:** one level at a time with a back link; the browser's Back button also moves up.
+- Every level has a URL: `/` (the [home page](../home/home_requirement.md)), `/<category>`, and `/<category>/<topic route>`; a deeper URL opens its topic. Reloading or sharing a URL opens the same screen.
+- **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or the home page at `/`. The sidebar collapses to a narrow rail of category icons with its header button or the `[` key, and the browser remembers the choice; a rail icon reopens the sidebar on that category.
+- **1200 px and wider on a touch screen:** categories, catalogue, and feature side by side; at `/` the home page fills the space beside the categories, and an empty feature pane says "Choose a topic".
+- **840 px to under 1200 px on a touch screen:** two panes: categories and the home page, or the catalogue with a back link and the feature.
+- **Under 840 px, any pointer:** one level at a time, starting with the home page (which lists every category), with a back link; the browser's Back button also moves up.
 - An unknown category or topic in the URL falls back to the nearest valid level.
 - Categories appear in this order: TypeScript, React, HTTP Client, Security, Integration, Others.
 
@@ -49,7 +49,7 @@ Give users one starting point that lists every lab category, and leads to its to
 
 | ID | Scenario | Expected result |
 | --- | --- | --- |
-| SDB-AC-01 | Open `/` | All six categories are listed in order. |
+| SDB-AC-01 | Open `/` | The home page, and (except on a phone) the sidebar, list all six categories in order. |
 | SDB-AC-02 | Phone width: open a category, then a topic, then press Back twice | Catalogue, feature, then back to the catalogue and the categories. |
 | SDB-AC-03 | Wide window: select a category and a topic | Three panes; both selections are outlined. |
 | SDB-AC-04 | Reload a topic URL | The same topic opens. |
