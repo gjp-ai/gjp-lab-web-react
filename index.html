@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="GJP Lab: learn the web platform, TypeScript, and React by running small, readable features." />
     <title>GJP Lab</title>
+    <script>
+      // Apply a saved light or dark choice before the first paint, so the page does not flash the other
+      // scheme. The key matches colorSchemeKey in src/common/theme/colorScheme.ts.
+      try {
+        const scheme = localStorage.getItem('gjpLab.colorScheme')
+        if (scheme === 'light' || scheme === 'dark') document.documentElement.dataset.theme = scheme
+      } catch {
+        // Storage is blocked: follow the system setting.
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

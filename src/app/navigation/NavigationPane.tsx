@@ -19,7 +19,7 @@ export function NavigationPane({
   className?: string
   /** Lets the content use up to 1120 px, for the large content area beside the desktop tree. */
   isWide?: boolean
-  /** A control at the end of the header, such as the desktop sidebar's hide button. */
+  /** Controls at the end of the header, such as the colour-scheme toggle and the desktop sidebar's hide button. */
   headerAction?: ReactNode
   children: ReactNode
 }) {
@@ -38,7 +38,7 @@ export function NavigationPane({
           </Link>
         )}
         <h1 className={'truncate text-[22px] ' + (backTo === undefined ? 'pl-3' : '')}>{title}</h1>
-        {headerAction !== undefined && <div className="ml-auto">{headerAction}</div>}
+        {headerAction !== undefined && <div className="ml-auto flex items-center gap-1">{headerAction}</div>}
       </header>
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className={'mx-auto w-full ' + (isWide ? 'max-w-[1120px]' : 'max-w-[720px]')}>{children}</div>

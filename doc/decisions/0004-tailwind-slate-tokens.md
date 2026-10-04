@@ -1,6 +1,6 @@
 # 0004: Slate design tokens in Tailwind, with no component library
 
-Status: Accepted, 2026-10-04
+Status: Accepted, 2026-10-04. Amended by [0006](0006-colour-scheme-toggle.md): a toggle can override the system light or dark setting.
 
 ## Context
 

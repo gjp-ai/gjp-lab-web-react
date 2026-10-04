@@ -34,8 +34,8 @@ flowchart LR
 | `src/app/startup/` | Splash and maintenance screens, and `fetchMaintenanceMode` |
 | `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `DesktopSidebar`, `NavigationTree`, `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
 | `src/features/<category>/<feature>/` | Feature screens, repositories, models, and their tests |
-| `src/common/config/` | Stable application behaviour constants (`AppConfig`) |
-| `src/common/theme/` | Slate tokens (`theme.css`), `LabButton`, `LabListCard`, `LabDemoPage` and `LabDemoSection`, and `LabMark` |
+| `src/common/config/` | Stable application behaviour constants (`AppConfig`) and `preferenceStorage` (safe local storage access for saved preferences) |
+| `src/common/theme/` | Slate tokens (`theme.css`), `ColorSchemeToggle` and `useColorScheme`, `LabButton`, `LabListCard`, `LabDemoPage` and `LabDemoSection`, and `LabMark` |
 | `src/common/codesample/` | `CodeSample`, `runSample`, and the runnable sample page and card used by the TypeScript topics |
 
 The layout and names mirror the iOS lab ([decision 0001](../decisions/0001-flat-feature-folders.md)). Folder names are lowercase and do not repeat their parent (`httpclient/fetch`). New code should follow the closest feature pattern; reusable app behaviour belongs in `common/`.

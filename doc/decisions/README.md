@@ -22,3 +22,4 @@ A record may end with a one-line **Related** note pointing to the matching choic
 | [0003](0003-url-driven-adaptive-panes.md) | The URL is the navigation state, shown as adaptive panes | 2026-10-04 |
 | [0004](0004-tailwind-slate-tokens.md) | Slate design tokens in Tailwind, with no component library | 2026-10-04 |
 | [0005](0005-desktop-tree-sidebar.md) | A tree sidebar for desktop browsers; touch screens keep the panes | 2026-10-04 |
+| [0006](0006-colour-scheme-toggle.md) | A light and dark toggle that overrides the system setting | 2026-10-04 |

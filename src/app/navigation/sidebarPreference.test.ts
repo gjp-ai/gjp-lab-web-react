@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { isSidebarShortcut, readSidebarCollapsed, writeSidebarCollapsed, type PreferenceStorage } from './sidebarPreference'
+import type { PreferenceStorage } from '@/common/config/preferenceStorage'
+import { isSidebarShortcut, readSidebarCollapsed, writeSidebarCollapsed } from './sidebarPreference'
 
 function memoryStorage(): PreferenceStorage {
   const values = new Map<string, string>()

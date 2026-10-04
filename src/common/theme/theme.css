@@ -3,40 +3,34 @@
 /*
  * Slate design system. The same light and dark values as the iOS LabTheme and the Android colour scheme.
  * Components use the Tailwind colours below (bg-surface, text-on-surface-variant, …), never raw hex values.
+ *
+ * Each role is light-dark(<light value>, <dark value>); the browser picks one from `color-scheme`.
+ * By default that follows the system setting. The colour-scheme toggle sets data-theme="light" or "dark"
+ * on <html> to override it (see colorScheme.ts; index.html applies a saved choice before the first paint).
  */
 :root {
   color-scheme: light dark;
-  --lab-primary: #000000;
-  --lab-on-primary: #ffffff;
-  --lab-primary-container: #e8e8e8;
-  --lab-background: #fffcf8;
-  --lab-surface: #ffffff;
-  --lab-surface-container: #f1f1f1;
-  --lab-on-surface: #1a1a1a;
-  --lab-on-surface-variant: #474747;
-  --lab-outline-variant: #c6c6c6;
-  --lab-error: #ba1a1a;
-  --lab-error-container: #ffdad6;
-  --lab-on-error-container: #410002;
-  --lab-success: #2e7d32;
+  --lab-primary: light-dark(#000000, #ffffff);
+  --lab-on-primary: light-dark(#ffffff, #000000);
+  --lab-primary-container: light-dark(#e8e8e8, #343434);
+  --lab-background: light-dark(#fffcf8, #0d0d0d);
+  --lab-surface: light-dark(#ffffff, #151515);
+  --lab-surface-container: light-dark(#f1f1f1, #222222);
+  --lab-on-surface: light-dark(#1a1a1a, #e8e8e8);
+  --lab-on-surface-variant: light-dark(#474747, #c6c6c6);
+  --lab-outline-variant: light-dark(#c6c6c6, #474747);
+  --lab-error: light-dark(#ba1a1a, #ffb4ab);
+  --lab-error-container: light-dark(#ffdad6, #93000a);
+  --lab-on-error-container: light-dark(#410002, #ffdad6);
+  --lab-success: light-dark(#2e7d32, #81c784);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --lab-primary: #ffffff;
-    --lab-on-primary: #000000;
-    --lab-primary-container: #343434;
-    --lab-background: #0d0d0d;
-    --lab-surface: #151515;
-    --lab-surface-container: #222222;
-    --lab-on-surface: #e8e8e8;
-    --lab-on-surface-variant: #c6c6c6;
-    --lab-outline-variant: #474747;
-    --lab-error: #ffb4ab;
-    --lab-error-container: #93000a;
-    --lab-on-error-container: #ffdad6;
-    --lab-success: #81c784;
-  }
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @theme inline {

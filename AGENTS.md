@@ -53,7 +53,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 - Follow the closest existing feature and match the surrounding code.
 - Types and files with an iOS counterpart use the iOS name (`ContentView`, `CategorySidebar`, `FeatureCatalogScreen`, `NavigationMenu`, `FeatureRoute`, `LabDemoSection`); web-only pieces keep web names.
 - Function components with named exports; `@/` imports from `src/`; no `any`.
-- Use the Slate palette through the Tailwind theme colours (`bg-surface`, `text-on-surface-variant`, `border-outline-variant`, …), always with the matching `on-…` colour; no raw colours in components. Light and dark follow `prefers-color-scheme`.
+- Use the Slate palette through the Tailwind theme colours (`bg-surface`, `text-on-surface-variant`, `border-outline-variant`, …), always with the matching `on-…` colour; no raw colours in components. Light and dark follow `prefers-color-scheme` until the person uses `ColorSchemeToggle`, which sets `data-theme` on `<html>`; check both schemes.
 - Main actions use `LabButton`. Navigation rows use `LabListCard` (the desktop `NavigationTree` uses compact rows). Demo topics use `LabDemoPage` with one `LabDemoSection` per technique.
 - Use semantic HTML first (`button`, `a`, `label`, headings, `dl`); every control has an accessible name, and icon-only controls have an `aria-label`.
 - TypeScript samples: each snippet must equal the body of the function that runs it (write `` \` `` and `\${` inside the template literal); `typescriptTopics.test.ts` fails if they differ. A new topic is added to that test's `topics` list.

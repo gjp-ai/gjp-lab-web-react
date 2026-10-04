@@ -1,10 +1,5 @@
 import { useState } from 'react'
-
-/** The part of `Storage` the preference needs, so tests can pass a fake. */
-export interface PreferenceStorage {
-  getItem(key: string): string | null
-  setItem(key: string, value: string): void
-}
+import { browserStorage, type PreferenceStorage } from '@/common/config/preferenceStorage'
 
 const collapsedKey = 'gjpLab.sidebarCollapsed'
 
@@ -47,11 +42,3 @@ export function useSidebarCollapsed(): [boolean, (isCollapsed: boolean) => void]
   return [isCollapsed, update]
 }
 
-// Reading window.localStorage itself throws when site data is blocked.
-function browserStorage(): PreferenceStorage | undefined {
-  try {
-    return window.localStorage
-  } catch {
-    return undefined
-  }
-}

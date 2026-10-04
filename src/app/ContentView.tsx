@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router'
+import { ColorSchemeToggle } from '@/common/theme/ColorSchemeToggle'
 import type { HttpResponse } from '@/features/httpclient/fetch/HttpResponse'
 import { FeatureDestination, ResponseDestination, type FeatureNavigation } from './FeatureDestination'
 import { CategorySidebar } from './navigation/CategorySidebar'
@@ -56,7 +57,7 @@ function Panes() {
   }
 
   const sidebar = (className?: string) => (
-    <NavigationPane title="GJP Lab" className={className}>
+    <NavigationPane title="GJP Lab" className={className} headerAction={<ColorSchemeToggle />}>
       <CategorySidebar categories={navigationMenu.categories} selectedCategoryId={category?.id} />
     </NavigationPane>
   )

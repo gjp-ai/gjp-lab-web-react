@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type Ref } from 'react'
+import { ColorSchemeToggle } from '@/common/theme/ColorSchemeToggle'
 import { CategoryIcon } from './CategoryIcon'
 import type { FeatureRoute } from './FeatureRoute'
 import type { NavigationCategory } from './NavigationMenu'
@@ -78,6 +79,9 @@ export function DesktopSidebar({
             )
           })}
         </ul>
+        <div className="mt-auto pb-3">
+          <ColorSchemeToggle />
+        </div>
       </nav>
     )
   }
@@ -86,7 +90,12 @@ export function DesktopSidebar({
     <NavigationPane
       title="GJP Lab"
       className="w-72 shrink-0"
-      headerAction={<SidebarToggle ref={toggleRef} label="Hide sidebar" onClick={() => changeCollapsed(true)} />}
+      headerAction={
+        <>
+          <ColorSchemeToggle />
+          <SidebarToggle ref={toggleRef} label="Hide sidebar" onClick={() => changeCollapsed(true)} />
+        </>
+      }
     >
       <NavigationTree
         categories={categories}
