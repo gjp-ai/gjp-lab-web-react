@@ -261,7 +261,7 @@ export const featureRoutes = [
   'typescriptBasics',
   'typescriptNullish',
   // …
-  'axios',
+  'clipboard',
   'browserInfo',
 ] as const
 

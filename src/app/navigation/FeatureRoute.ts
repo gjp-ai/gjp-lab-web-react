@@ -26,6 +26,8 @@ export const featureRoutes = [
   'fetch',
   'axios',
   'hideContent',
+  'csp',
+  'clipboard',
   'browserInfo',
 ] as const
 

@@ -34,7 +34,7 @@ doc/
             └── <feature>_detail_design.md
 ```
 
-The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are documented in [application architecture](architecture/application.md) and the sidebar detailed design. `src/common/config/` holds only constants and has no spec.
+The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are documented in [application architecture](architecture/application.md) and the sidebar detailed design. `src/common/config/` holds constants and has no spec; its Content Security Policy is described in the [Content Security Policy detailed design](specs/features/security/csp/csp_detail_design.md).
 
 `<feature>` is the code folder name (for example `fetch`, `browserinfo`). Every screen has both a requirement and a detail design; add them together, starting from [`templates/`](templates/). Shared code with no user-facing behaviour, such as `common/theme/`, has a detail design only.
 
@@ -76,6 +76,8 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | HTTP Client → axios | [Requirement](specs/features/httpclient/axios/axios_requirement.md) | [Detailed design](specs/features/httpclient/axios/axios_detail_design.md) |
 | HTTP Client shared layout | — | [Shared layout detailed design](specs/features/httpclient/shared/shared_detail_design.md) |
 | Security → Hide content when the page is hidden | [Requirement](specs/features/security/hidecontent/hidecontent_requirement.md) | [Detailed design](specs/features/security/hidecontent/hidecontent_detail_design.md) |
+| Security → Content Security Policy | [Requirement](specs/features/security/csp/csp_requirement.md) | [Detailed design](specs/features/security/csp/csp_detail_design.md) |
+| Security → Clipboard permissions | [Requirement](specs/features/security/clipboard/clipboard_requirement.md) | [Detailed design](specs/features/security/clipboard/clipboard_detail_design.md) |
 | Others → Browser & device | [Requirement](specs/features/others/browserinfo/browserinfo_requirement.md) | [Detailed design](specs/features/others/browserinfo/browserinfo_detail_design.md) |
 | New features | [Requirement template](templates/requirement.md) | [Detail design template](templates/detail_design.md) |
 

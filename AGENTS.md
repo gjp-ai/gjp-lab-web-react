@@ -19,7 +19,7 @@ GJPLab is a web lab for practising TypeScript, React, browser APIs, and third-pa
 ## Commands
 
 - Dev server: `npm run dev` (http://localhost:5173/lab/react/)
-- Build (type-check, then bundle): `npm run build`
+- Build (type-check, then bundle): `npm run build`; `npm run preview` serves the build with its Content Security Policy
 - Lint: `npm run lint`
 - Test: `npm test` (`npm run test:watch` while developing)
 
@@ -33,7 +33,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | `src/app/` | `App` (maintenance check, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `home/` holds the home page at `/`; `startup/` holds maintenance |
 | `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `DesktopSidebar` and `NavigationTree` (desktop sidebar, collapsible to an icon rail), `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
 | `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders); `src/features/httpclient/shared/` holds the page, examples, and helpers that fetch and axios share |
-| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabTabs`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
+| `src/common/` | Shared `config/` (`AppConfig`, `preferenceStorage`, and the site's Content Security Policy), `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabTabs`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
 | `src/test/` | Test setup only |
 | `public/` | Favicon and the bundled `remote-config.json` (maintenance flag) |
 | `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice); `guides/` for learning material (update `guides/typescript_tutorial.md` and `guides/react_tutorial.md` when code they quote changes) |
@@ -62,5 +62,5 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 ## Boundaries
 
 - **Always:** run `npm run lint`, `npm test`, and `npm run build` before reporting done; open the change in a browser and check the console; keep tests deterministic (no live HTTP endpoint); update the matching `doc/` page when files move or documented behaviour changes; report what was not verified (other browsers, screen readers, real devices).
-- **Ask first:** new dependencies; changes to the routing scheme or URL shapes; new environment variables (keep `.env.example` in sync).
-- **Never:** commit `.env.local`, keys, or tokens; put secrets in `VITE_` variables (they are bundled into the page); log request URLs, payloads, or response bodies.
+- **Ask first:** new dependencies; changes to the routing scheme or URL shapes; new environment variables (keep `.env.example` in sync); changes to the Content Security Policy.
+- **Never:** add inline scripts or `<style>` elements, `eval`, `new Function`, or resources from other hosts (the production Content Security Policy blocks them; [decision 0009](doc/decisions/0009-content-security-policy.md)); commit `.env.local`, keys, or tokens; put secrets in `VITE_` variables (they are bundled into the page); log request URLs, payloads, or response bodies.

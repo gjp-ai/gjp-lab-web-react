@@ -11,11 +11,11 @@ A sidebar lists the categories; each category's catalogue marks topics as availa
 | TypeScript | All ten topics, each a set of runnable samples that show real output: values & types, null & undefined, arrays/sets/maps, functions & closures, objects/classes/enums, interfaces & generics, error handling, promises & async/await, iterators & generators, strings & regex | — |
 | React | All ten topics, each with live demos: components & props, state & events, effects, lists & keys, forms, context, refs & the DOM, Suspense & lazy loading, transitions & actions, accessibility & testing | — |
 | HTTP Client | **fetch** and **axios**: build and send a request to seven example APIs, inspect status, time, size, body, and headers, and read the code; axios adds a comparison with fetch | — |
-| Security | **Hide content when the page is hidden**: take a sample account card off the screen when the page is hidden or loses focus, with saved settings and an activity log | Content Security Policy, clipboard permissions |
+| Security | **Hide content when the page is hidden**: take a sample account card off the screen when the page is hidden or loses focus. **Content Security Policy**: the site's own policy, attempts it blocks, violation reports, and a policy checker. **Clipboard permissions**: copy, clear a copied secret, read and paste, and the permission states | — |
 | Integration | — | Firebase |
 | Others | **Browser & device**: browser, language, screen, pixel ratio, CPU, and memory | — |
 
-App-wide behaviour: a maintenance mode read from a JSON file at startup, and a Slate light/dark design system.
+App-wide behaviour: a maintenance mode read from a JSON file at startup, a Slate light/dark design system, and a Content Security Policy in the production build.
 
 ## Requirements
 
@@ -35,6 +35,7 @@ Other commands:
 npm test        # Vitest unit and component tests
 npm run lint    # oxlint
 npm run build   # type-check and production build in dist/
+npm run preview # serve dist/ at http://localhost:4173/lab/react/, with the Content Security Policy
 ```
 
 ## Deployment
@@ -43,9 +44,12 @@ The app is served from `/lab/react/` (the `base` in `vite.config.ts`). Copy `dis
 
 ```nginx
 location /lab/react/ {
+    add_header Content-Security-Policy "frame-ancestors 'none'" always;
     try_files $uri /lab/react/index.html;
 }
 ```
+
+The build adds the site's Content Security Policy to `index.html` as a `<meta>` element ([decision 0009](doc/decisions/0009-content-security-policy.md)). A `<meta>` policy cannot stop other sites framing the page, so the server adds `frame-ancestors` as a header, as above.
 
 Maintenance mode is read from `public/remote-config.json` (`{ "maintenanceEnabled": false }`). To read it from a server instead, copy `.env.example` to `.env.local` and set `VITE_REMOTE_CONFIG_URL`.
 

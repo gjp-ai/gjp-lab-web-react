@@ -27,6 +27,8 @@ const screens: Record<FeatureRoute, ComponentType> = {
   fetch: lazy(() => import('@/features/httpclient/fetch/FetchScreen').then((m) => ({ default: m.FetchScreen }))),
   axios: lazy(() => import('@/features/httpclient/axios/AxiosScreen').then((m) => ({ default: m.AxiosScreen }))),
   hideContent: lazy(() => import('@/features/security/hidecontent/HideContentScreen').then((m) => ({ default: m.HideContentScreen }))),
+  csp: lazy(() => import('@/features/security/csp/CspScreen').then((m) => ({ default: m.CspScreen }))),
+  clipboard: lazy(() => import('@/features/security/clipboard/ClipboardScreen').then((m) => ({ default: m.ClipboardScreen }))),
   browserInfo: lazy(() => import('@/features/others/browserinfo/BrowserInfoScreen').then((m) => ({ default: m.BrowserInfoScreen }))),
 }
 

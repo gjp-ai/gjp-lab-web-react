@@ -44,6 +44,7 @@ flowchart TD
 - The code snippet is built as text and rendered inside `<code>` by React, so typed URLs and payloads are escaped, never run.
 - The examples call seven public APIs that need no key and allow any origin through CORS. Every example was sent from a browser page on `localhost` while it was written (statuses checked: 200, 201, 204, 404, 405, 418). They send no personal data. restful-api.dev and Swagger Petstore keep what is written, so their examples use made-up content; Petstore is shared with everyone.
 - `parseHttpUrl` rejects `javascript:` and other schemes, so the URL field cannot run script.
+- In the production build, the site's Content Security Policy (`connect-src 'self' https:`) blocks plain http URLs, which fail with the network error message; HTTPS URLs to any host are allowed.
 
 ## Known gaps
 

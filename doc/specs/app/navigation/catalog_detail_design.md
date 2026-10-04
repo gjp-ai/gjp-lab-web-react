@@ -29,7 +29,7 @@ The screen receives a `NavigationCategory` and the selected `FeatureRoute` from 
 | TypeScript | Values & types, null & undefined, arrays/sets/maps, functions & closures, objects/classes/enums, interfaces & generics, error handling, promises & async/await, iterators & generators, strings & regex | — |
 | React | Components & props, state & events, effects, lists & keys, forms, context, refs & the DOM, Suspense & lazy loading, transitions & actions, accessibility & testing | — |
 | HTTP Client | fetch, axios | — |
-| Security | Hide content when the page is hidden | Content Security Policy, clipboard permissions |
+| Security | Hide content when the page is hidden, Content Security Policy, clipboard permissions | — |
 | Integration | — | Firebase |
 | Others | Browser & device | — |
 
@@ -37,10 +37,10 @@ The screen receives a `NavigationCategory` and the selected `FeatureRoute` from 
 
 | Gap | Effect | Suggested fix |
 | --- | --- | --- |
-| Three topics are still planned (Content Security Policy, clipboard permissions, Firebase) | Their rows cannot be opened | Implement topics one at a time, each with its specs |
+| One topic is still planned (Firebase) | Its row cannot be opened | Implement topics one at a time, each with its specs |
 | Planned rows give no feedback when clicked | Users may think the click failed | Accepted (CAT-AC-03) |
 
 ## Verification
 
-- Automated: `ContentView.test.tsx` (`shows planned topics without a link`); `NavigationMenu.test.ts` (routes, icons, unique titles).
+- Automated: `ContentView.test.tsx` (`shows available topics as links and planned topics without one`); `NavigationMenu.test.ts` (routes, icons, unique titles).
 - Manual: CAT-AC-01 to CAT-AC-03 with VoiceOver in Safari.

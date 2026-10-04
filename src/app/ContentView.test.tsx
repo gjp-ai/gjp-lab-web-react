@@ -84,8 +84,11 @@ describe('ContentView', () => {
 
     renderAt('/security', 400)
     expect(screen.getByRole('link', { name: /Hide content when the page is hidden/ })).toHaveAttribute('href', '/security/hideContent')
-    expect(screen.queryByRole('link', { name: /Content Security Policy/ })).not.toBeInTheDocument()
-    expect(screen.getAllByRole('img', { name: 'Planned' })).toHaveLength(2)
+    expect(screen.getByRole('link', { name: /Content Security Policy/ })).toHaveAttribute('href', '/security/csp')
+
+    renderAt('/integration', 400)
+    expect(screen.queryByRole('link', { name: /Firebase/ })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('img', { name: 'Planned' })).toHaveLength(1)
   })
 
   it('falls back to the nearest valid level for an unknown URL', () => {
