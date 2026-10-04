@@ -1,7 +1,6 @@
-import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router'
+import { Navigate, Route, Routes, useParams } from 'react-router'
 import { ColorSchemeToggle } from '@/common/theme/ColorSchemeToggle'
-import type { HttpResponse } from '@/features/httpclient/fetch/HttpResponse'
-import { FeatureDestination, ResponseDestination, type FeatureNavigation } from './FeatureDestination'
+import { FeatureDestination } from './FeatureDestination'
 import { CategorySidebar } from './navigation/CategorySidebar'
 import { FeatureCatalogScreen } from './navigation/FeatureCatalogScreen'
 import { type FeatureRoute, isFeatureRoute } from './navigation/FeatureRoute'
@@ -12,7 +11,7 @@ import { paneLayout, useFinePointer, useWindowWidth } from './navigation/paneLay
 
 /**
  * The app's navigation: categories, catalogue, and feature. The URL is the selection
- * (`/`, `/<category>`, `/<category>/<route>`, `/<category>/<route>/response`), so every screen can be
+ * (`/`, `/<category>`, `/<category>/<route>`), so every screen can be
  * linked and the browser's Back button moves up one level. Wide touch screens show the levels side by side;
  * wide windows with a mouse show a tree sidebar next to the content.
  */
@@ -22,23 +21,17 @@ export function ContentView() {
       <Route path="/" element={<Panes />} />
       <Route path="/:categoryId" element={<Panes />} />
       <Route path="/:categoryId/:route" element={<Panes />} />
-      <Route path="/:categoryId/:route/:detail" element={<Panes />} />
+      {/* Deeper URLs (such as the retired /<category>/fetch/response) open their topic. */}
+      <Route path="/:categoryId/:route/*" element={<Panes />} />
     </Routes>
   )
 }
 
-/** State passed with the URL when a screen is pushed (the HTTP response is too large for the URL). */
-interface PushState {
-  response?: HttpResponse
-}
-
 function Panes() {
   const params = useParams()
-  const location = useLocation()
-  const navigate = useNavigate()
   const layout = paneLayout(useWindowWidth(), useFinePointer())
 
-  // An unknown category, topic, or pushed screen falls back to the nearest valid level.
+  // An unknown category or topic, or extra path segments, fall back to the nearest valid level.
   const category = findCategory(params.categoryId)
   if (params.categoryId !== undefined && category === undefined) return <Navigate to="/" replace />
   const route = params.route
@@ -47,13 +40,8 @@ function Panes() {
   if (category !== undefined && route !== undefined && selectedRoute === undefined) {
     return <Navigate to={`/${category.id}`} replace />
   }
-  const response = (location.state as PushState | null)?.response
-  if (selectedRoute !== undefined && params.detail !== undefined && (params.detail !== 'response' || response === undefined)) {
+  if (selectedRoute !== undefined && params['*']) {
     return <Navigate to={`/${category!.id}/${selectedRoute}`} replace />
-  }
-
-  const navigation: FeatureNavigation = {
-    showResponse: (pushed) => navigate(`/${category!.id}/${selectedRoute!}/response`, { state: { response: pushed } satisfies PushState }),
   }
 
   const sidebar = (className?: string) => (
@@ -71,17 +59,11 @@ function Panes() {
     </NavigationPane>
   )
 
-  // The pushed response replaces the feature in its pane; Back returns to the feature.
-  const feature = (shown: FeatureRoute, showBack: boolean, className?: string) =>
-    response !== undefined && params.detail === 'response' ? (
-      <NavigationPane title="Response" backTo={`/${category!.id}/${shown}`} className={className} isWide={isWide}>
-        <ResponseDestination response={response} />
-      </NavigationPane>
-    ) : (
-      <NavigationPane title={findTopic(shown)?.title ?? shown} backTo={showBack ? `/${category!.id}` : undefined} className={className} isWide={isWide}>
-        <FeatureDestination route={shown} navigation={navigation} />
-      </NavigationPane>
-    )
+  const feature = (shown: FeatureRoute, showBack: boolean, className?: string) => (
+    <NavigationPane title={findTopic(shown)?.title ?? shown} backTo={showBack ? `/${category!.id}` : undefined} className={className} isWide={isWide}>
+      <FeatureDestination route={shown} />
+    </NavigationPane>
+  )
 
   const featureOrPlaceholder = (className: string) => {
     if (selectedRoute !== undefined) return feature(selectedRoute, false, className)

@@ -8,7 +8,7 @@ export class FetchRepositoryError extends Error {}
 
 /**
  * Builds and sends one request with the browser's fetch API. It owns URL validation, the 15-second
- * timeout, JSON headers, pretty-printing, and header sorting, so the screen only shows state. Every
+ * timeout, JSON headers, timing, pretty-printing, and header sorting, so the screen only shows state. Every
  * HTTP status resolves (fetch does not reject on 404 or 500); only network failures, timeouts,
  * cancellation, and invalid URLs reject.
  */
@@ -30,6 +30,7 @@ export async function executeRequest(
   const timeout = AbortSignal.timeout(requestTimeoutMs)
   const signal = options.signal ? AbortSignal.any([options.signal, timeout]) : timeout
 
+  const startedAt = performance.now()
   let response: Response
   try {
     response = await (options.fetchImpl ?? fetch)(url, { method, headers, body, signal })
@@ -41,8 +42,15 @@ export async function executeRequest(
   }
 
   const text = await response.text()
+  const durationMs = Math.round(performance.now() - startedAt)
   const sortedHeaders = [...response.headers.entries()].sort(([a], [b]) => a.localeCompare(b))
-  return { status: response.status, body: prettyJson(text), headers: sortedHeaders }
+  return {
+    status: response.status,
+    body: prettyJson(text),
+    headers: sortedHeaders,
+    durationMs,
+    sizeBytes: new TextEncoder().encode(text).length,
+  }
 }
 
 /** Accepts only http:// and https:// URLs, ignoring surrounding whitespace. */

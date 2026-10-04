@@ -12,7 +12,7 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 
 | Source | Responsibility |
 | --- | --- |
-| [`ContentView.tsx`](../../../../src/app/ContentView.tsx) | Routes, URL validation and fallbacks, pane layout, and `FeatureNavigation` |
+| [`ContentView.tsx`](../../../../src/app/ContentView.tsx) | Routes, URL validation and fallbacks, and pane layout |
 | [`paneLayout.ts`](../../../../src/app/navigation/paneLayout.ts) | `paneLayout` breakpoints, `useWindowWidth`, and `useFinePointer` |
 | [`DesktopSidebar.tsx`](../../../../src/app/navigation/DesktopSidebar.tsx) | Desktop sidebar: the tree, or the collapsed icon rail; the hide/show button and `[` shortcut |
 | [`NavigationTree.tsx`](../../../../src/app/navigation/NavigationTree.tsx) | Desktop tree sidebar: category groups and topic links |
@@ -30,7 +30,7 @@ Use one root component, `ContentView`, for every window size. The URL holds the 
 | --- | --- | --- |
 | `:categoryId` | Selected category | Replace with `/` |
 | `:route` | Selected `FeatureRoute`, which must belong to the category | Replace with `/<category>` |
-| `:detail` | Pushed screen (`response`), which needs router state | Replace with `/<category>/<route>` |
+| Any deeper segment | Not used (old `/response` links) | Replace with `/<category>/<route>` |
 
 | Layout | Window and pointer | Panes |
 | --- | --- | --- |

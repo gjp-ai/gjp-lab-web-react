@@ -32,6 +32,8 @@ describe('executeRequest', () => {
     expect(response.status).toBe(404)
     expect(response.body).toBe('{\n  "error": "missing"\n}')
     expect(response.headers.map(([name]) => name)).toEqual(['content-type', 'x-zeta'])
+    expect(response.sizeBytes).toBe(19)
+    expect(response.durationMs).toBeGreaterThanOrEqual(0)
   })
 
   it('sends JSON headers, and the payload only for POST and PUT', async () => {

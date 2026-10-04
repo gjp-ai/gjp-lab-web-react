@@ -72,7 +72,7 @@ describe('ContentView', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'TypeScript' })).toBeInTheDocument()
   })
 
-  it('returns to the feature when a pushed screen has no data (for example after a reload)', async () => {
+  it('opens the topic for a deeper URL, such as an old response link', async () => {
     renderAt('/httpClient/fetch/response', 400)
     expect(await screen.findByRole('heading', { level: 1, name: 'fetch' })).toBeInTheDocument()
   })

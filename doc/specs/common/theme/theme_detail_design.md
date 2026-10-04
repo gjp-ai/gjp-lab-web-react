@@ -27,6 +27,7 @@ GJPLab uses a restrained, high-contrast Slate direction based on black, white, n
 ## Components
 
 - [`LabButton`](../../../../src/common/theme/LabButton.tsx): the main action, a `primary` pill with `on-primary` text, at least 44 px tall, dimmed when pressed, and `primary-container` with `on-surface-variant` text when disabled. `variant="secondary"` is an outlined `surface` pill with `on-surface` text for the less important action beside it.
+- [`LabTabs`](../../../../src/common/theme/LabTabs.tsx): tabs following the WAI-ARIA pattern (a `tablist` of buttons, arrow keys, Home, and End, one `tabpanel`). The selected tab has a 2 px `primary` underline and `on-surface` text; others use `on-surface-variant`.
 - [`labInputClassName`](../../../../src/common/theme/labInput.ts): classes for text inputs, selects, and text areas: a `surface` field with an `outline-variant` border that turns `error` with `aria-invalid`, at least 44 px tall. Focus shows a 2 px `primary` outline.
 - [`LabListCard`](../../../../src/common/theme/LabListCard.tsx): a navigation row as its own `surface` card with 18 px corners and a 0.5 px `outline-variant` border; a selected row gets a 1 px `primary` border. With `to` it is a link; without it, a plain card.
 - [`LabDemoPage` and `LabDemoSection`](../../../../src/common/theme/LabDemoSection.tsx): a demo page with an `on-surface-variant` introduction, and cards with an 18 px radius, a soft shadow, a real `h2` heading, a caption, and the live sample.

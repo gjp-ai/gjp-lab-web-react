@@ -32,8 +32,3 @@ export type FeatureRoute = (typeof featureRoutes)[number]
 export function isFeatureRoute(value: string): value is FeatureRoute {
   return (featureRoutes as readonly string[]).includes(value)
 }
-
-/** A screen pushed on top of a feature inside the feature pane: `/<category>/<route>/<detail>`. */
-export const detailRoutes = ['response'] as const
-
-export type DetailRoute = (typeof detailRoutes)[number]

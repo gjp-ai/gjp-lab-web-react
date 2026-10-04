@@ -20,7 +20,6 @@ flowchart LR
     Destination --> Components[ComponentsScreen]
     Destination --> Fetch[FetchScreen]
     Destination --> Browser[BrowserInfoScreen]
-    Fetch -->|/response| Response[HttpResponseScreen]
 ```
 
 [`main.tsx`](../../src/main.tsx) mounts [`App`](../../src/app/App.tsx) inside a `BrowserRouter` and loads the theme. `App` reads the maintenance flag (showing only the background meanwhile), then [`ContentView`](../../src/app/ContentView.tsx) or the maintenance screen.
@@ -31,10 +30,10 @@ flowchart LR
 | --- | --- |
 | `src/app/` | `App` (startup phases), `ContentView` (routes and panes), and `FeatureDestination` (maps a `FeatureRoute` to its lazily loaded screen) |
 | `src/app/startup/` | The maintenance screen and `fetchMaintenanceMode` |
-| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute` and `DetailRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `DesktopSidebar`, `NavigationTree`, `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
+| `src/app/navigation/` | `navigation.json` and its parser `NavigationMenu`; `FeatureRoute`; `paneLayout`, `useWindowWidth`, and `useFinePointer`; `NavigationPane`, `DesktopSidebar`, `NavigationTree`, `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen` |
 | `src/features/<category>/<feature>/` | Feature screens, repositories, models, and their tests |
 | `src/common/config/` | Stable application behaviour constants (`AppConfig`) and `preferenceStorage` (safe local storage access for saved preferences) |
-| `src/common/theme/` | Slate tokens (`theme.css`), `ColorSchemeToggle` and `useColorScheme`, `LabButton`, `LabListCard`, and `LabDemoPage` and `LabDemoSection` |
+| `src/common/theme/` | Slate tokens (`theme.css`), `ColorSchemeToggle` and `useColorScheme`, `LabButton`, `LabTabs`, `LabListCard`, and `LabDemoPage` and `LabDemoSection` |
 | `src/common/codesample/` | `CodeSample`, `runSample`, and the runnable sample page and card used by the TypeScript topics |
 
 The layout and names mirror the iOS lab ([decision 0001](../decisions/0001-flat-feature-folders.md)). Folder names are lowercase and do not repeat their parent (`httpclient/fetch`). New code should follow the closest feature pattern; reusable app behaviour belongs in `common/`.
@@ -54,13 +53,12 @@ flowchart TD
     URL[Browser URL] --> Content[ContentView]
     Content -->|params| Menu[NavigationMenu]
     Content --> Destination[FeatureDestination]
-    Destination -->|FeatureNavigation| Screen[Feature screen]
+    Destination --> Screen[Feature screen]
     Screen --> Repository[Feature repository]
-    Screen -->|showResponse| URL
 ```
 
 - The URL owns the selection: `/<category>/<route>`. Links in the sidebar and catalogue change it; `ContentView` reads it with `useParams`.
-- A feature pushes a screen through `FeatureNavigation`, which navigates to `/<category>/<route>/response` with the response in router state.
+- A feature shows its results in place: the fetch page renders the response under its form. Deeper URLs open their topic ([decision 0007](../decisions/0007-inline-fetch-response.md)).
 - Components own their presentation state with `useState`; repositories (`executeRequest`, `readBrowserInfo`) own network and browser access.
 
 ## State and lifecycle model

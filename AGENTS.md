@@ -12,7 +12,7 @@ GJPLab is a web lab for practising TypeScript, React, browser APIs, and third-pa
 ## Tech Stack
 
 - React 19 and TypeScript (strict) built with Vite; npm.
-- React Router: the URL is the navigation state (`/`, `/<category>`, `/<category>/<route>`, `/<category>/<route>/response`).
+- React Router: the URL is the navigation state (`/`, `/<category>`, `/<category>/<route>`).
 - Tailwind CSS v4 with the Slate palette as theme tokens (`src/common/theme/theme.css`); no other CSS approach and no component library.
 - Tests: Vitest with jsdom and Testing Library, next to the code (`*.test.ts(x)`); lint with oxlint.
 
@@ -33,7 +33,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 | `src/app/` | `App` (maintenance check, then navigation), `ContentView` (routes and panes), `FeatureDestination` (route → lazily loaded screen); `startup/` holds maintenance |
 | `src/app/navigation/` | `navigation.json` (sidebar categories and catalogue topics), `NavigationMenu` (its parser), `FeatureRoute`, `paneLayout`, `NavigationPane`, `DesktopSidebar` and `NavigationTree` (desktop sidebar, collapsible to an icon rail), `sidebarPreference`, `CategorySidebar`, `CategoryIcon`, and `FeatureCatalogScreen`, in one flat folder |
 | `src/features/<category>/<feature>/` | Screens, repositories, models, and their tests in one flat folder (no `data/` or `model/` subfolders) |
-| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
+| `src/common/` | Shared `config/`, `theme/` (Slate tokens, `LabButton`, `LabListCard`, `LabDemoPage`, `LabTabs`), and `codesample/` (the runnable sample card used by the TypeScript topics) |
 | `src/test/` | Test setup only |
 | `public/` | Favicon and the bundled `remote-config.json` (maintenance flag) |
 | `doc/` | `architecture/` for project-wide docs; `specs/` mirrors `src/` (docs for `src/<path>/` live in `doc/specs/<path>/`); `templates/` for new specs; `decisions/` for decision records (read before reversing a structural choice) |
@@ -45,7 +45,7 @@ Folder names are lowercase and do not repeat their parent (`httpclient/fetch`).
 - Sidebar and catalogue content lives only in `navigation.json`; a topic's `route` must be a value in `FeatureRoute.ts`, mapped to its screen in `FeatureDestination`. Do not hard-code categories or topics in components.
 - Components keep their own state with `useState`. Do not add a state library, context store, or data-fetching library as incidental refactoring.
 - Components do not call `fetch` or read browser APIs directly: use the feature's repository (`executeRequest` owns URL validation, the 15-second timeout, JSON headers, formatting, and header sorting; `readBrowserInfo` takes the environment as a parameter so tests can fake it).
-- Feature screens are lazily loaded, so each one is its own chunk. A feature pushes a screen through `FeatureNavigation` (for example `showResponse`); the data travels in router state, and a pushed URL without its data falls back to the feature.
+- Feature screens are lazily loaded, so each one is its own chunk, and take no props from the app. A feature shows results in place (the fetch response appears under its form); deeper URLs open their topic ([decision 0007](doc/decisions/0007-inline-fetch-response.md)).
 - To add a feature, follow [Adding a feature](doc/architecture/application.md#adding-a-feature). Details: [application architecture](doc/architecture/application.md).
 
 ## Coding Standards

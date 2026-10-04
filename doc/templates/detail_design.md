@@ -19,7 +19,7 @@ Describe in one or two sentences how the implementation satisfies the requiremen
 ## Ownership and state
 
 - Who owns each piece of state (URL, router state, `useState`, repository), and how long it lives.
-- How the screen is reached (`/<category>/<route>`) and what it pushes (`DetailRoute`).
+- How the screen is reached (`/<category>/<route>`).
 - Effects, cancellation (`AbortController`), and lazy loading where relevant.
 
 ## <Feature-specific section>

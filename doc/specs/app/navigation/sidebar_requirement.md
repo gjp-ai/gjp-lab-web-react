@@ -21,7 +21,7 @@ Give users one starting point that lists every lab category, and leads to its to
 
 ## Behavior
 
-- Every level has a URL: `/` (categories), `/<category>`, `/<category>/<topic route>`, and `/<category>/<topic route>/response` for a pushed screen. Reloading or sharing a URL opens the same screen.
+- Every level has a URL: `/` (categories), `/<category>`, and `/<category>/<topic route>`; a deeper URL opens its topic. Reloading or sharing a URL opens the same screen.
 - **840 px and wider with a mouse or trackpad (desktop):** a tree sidebar beside the content. Each category is a group that opens and closes, with its topics listed under it; the selected category opens on its own. The content shows the feature, the catalogue at `/<category>`, or "Choose a topic" at `/`. The sidebar collapses to a narrow rail of category icons with its header button or the `[` key, and the browser remembers the choice; a rail icon reopens the sidebar on that category.
 - **1200 px and wider on a touch screen:** categories, catalogue, and feature side by side; empty panes say "Choose a category" or "Choose a topic".
 - **840 px to under 1200 px on a touch screen:** two panes: categories, or the catalogue with a back link, then the feature.
