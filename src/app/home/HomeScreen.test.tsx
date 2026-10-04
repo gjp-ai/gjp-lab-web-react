@@ -40,6 +40,7 @@ describe('HomeScreen', () => {
     }
     const react = screen.getByRole('list', { name: 'React topics' })
     expect(within(react).getByRole('link', { name: 'Effects' })).toHaveAttribute('href', '/react/reactEffects')
-    expect(screen.getByText(/Coming soon: Hide content when the page is hidden/)).toBeInTheDocument()
+    expect(screen.getByText(/Also planned: Content Security Policy/)).toBeInTheDocument()
+    expect(screen.getByText(/Coming soon: Firebase/)).toBeInTheDocument()
   })
 })

@@ -57,7 +57,7 @@
       "description": "Browser features that help protect sensitive content and user data.",
       "icon": "shield",
       "topics": [
-        { "title": "Hide content when the page is hidden", "description": "Blur sensitive content using the Page Visibility API." },
+        { "title": "Hide content when the page is hidden", "description": "Take sensitive content off the screen with the Page Visibility API.", "route": "hideContent" },
         { "title": "Content Security Policy", "description": "Limit which scripts and resources a page may load." },
         { "title": "Clipboard permissions", "description": "Read and write the clipboard only with permission." }
       ]

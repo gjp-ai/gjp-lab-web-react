@@ -11,7 +11,7 @@ A sidebar lists the categories; each category's catalogue marks topics as availa
 | TypeScript | All ten topics, each a set of runnable samples that show real output: values & types, null & undefined, arrays/sets/maps, functions & closures, objects/classes/enums, interfaces & generics, error handling, promises & async/await, iterators & generators, strings & regex | — |
 | React | All ten topics, each with live demos: components & props, state & events, effects, lists & keys, forms, context, refs & the DOM, Suspense & lazy loading, transitions & actions, accessibility & testing | — |
 | HTTP Client | **fetch** and **axios**: build and send a request to seven example APIs, inspect status, time, size, body, and headers, and read the code; axios adds a comparison with fetch | — |
-| Security | — | Hide content when the page is hidden, Content Security Policy, clipboard permissions |
+| Security | **Hide content when the page is hidden**: take a sample account card off the screen when the page is hidden or loses focus, with saved settings and an activity log | Content Security Policy, clipboard permissions |
 | Integration | — | Firebase |
 | Others | **Browser & device**: browser, language, screen, pixel ratio, CPU, and memory | — |
 

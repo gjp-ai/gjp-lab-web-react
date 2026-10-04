@@ -83,8 +83,9 @@ describe('ContentView', () => {
     expect(screen.getByRole('link', { name: /axios/ })).toBeInTheDocument()
 
     renderAt('/security', 400)
+    expect(screen.getByRole('link', { name: /Hide content when the page is hidden/ })).toHaveAttribute('href', '/security/hideContent')
     expect(screen.queryByRole('link', { name: /Content Security Policy/ })).not.toBeInTheDocument()
-    expect(screen.getAllByRole('img', { name: 'Planned' })).toHaveLength(3)
+    expect(screen.getAllByRole('img', { name: 'Planned' })).toHaveLength(2)
   })
 
   it('falls back to the nearest valid level for an unknown URL', () => {

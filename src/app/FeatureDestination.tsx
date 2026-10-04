@@ -26,6 +26,7 @@ const screens: Record<FeatureRoute, ComponentType> = {
   reactAccessibility: lazy(() => import('@/features/react/accessibility/AccessibilityScreen').then((m) => ({ default: m.AccessibilityScreen }))),
   fetch: lazy(() => import('@/features/httpclient/fetch/FetchScreen').then((m) => ({ default: m.FetchScreen }))),
   axios: lazy(() => import('@/features/httpclient/axios/AxiosScreen').then((m) => ({ default: m.AxiosScreen }))),
+  hideContent: lazy(() => import('@/features/security/hidecontent/HideContentScreen').then((m) => ({ default: m.HideContentScreen }))),
   browserInfo: lazy(() => import('@/features/others/browserinfo/BrowserInfoScreen').then((m) => ({ default: m.BrowserInfoScreen }))),
 }
 

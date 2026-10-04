@@ -25,6 +25,7 @@ export const featureRoutes = [
   'reactAccessibility',
   'fetch',
   'axios',
+  'hideContent',
   'browserInfo',
 ] as const
 

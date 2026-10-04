@@ -75,6 +75,7 @@ The `src/app/` root files (`App`, `ContentView`, `FeatureDestination`) are docum
 | HTTP Client → fetch | [Requirement](specs/features/httpclient/fetch/fetch_requirement.md) | [Detailed design](specs/features/httpclient/fetch/fetch_detail_design.md) |
 | HTTP Client → axios | [Requirement](specs/features/httpclient/axios/axios_requirement.md) | [Detailed design](specs/features/httpclient/axios/axios_detail_design.md) |
 | HTTP Client shared layout | — | [Shared layout detailed design](specs/features/httpclient/shared/shared_detail_design.md) |
+| Security → Hide content when the page is hidden | [Requirement](specs/features/security/hidecontent/hidecontent_requirement.md) | [Detailed design](specs/features/security/hidecontent/hidecontent_detail_design.md) |
 | Others → Browser & device | [Requirement](specs/features/others/browserinfo/browserinfo_requirement.md) | [Detailed design](specs/features/others/browserinfo/browserinfo_detail_design.md) |
 | New features | [Requirement template](templates/requirement.md) | [Detail design template](templates/detail_design.md) |
 

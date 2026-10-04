@@ -27,9 +27,9 @@ The screen receives a `NavigationCategory` and the selected `FeatureRoute` from 
 | Category | Available | Planned |
 | --- | --- | --- |
 | TypeScript | Values & types, null & undefined, arrays/sets/maps, functions & closures, objects/classes/enums, interfaces & generics, error handling, promises & async/await, iterators & generators, strings & regex | — |
-| React | Components & props | State & events, effects, lists & keys, forms, context, refs & the DOM, Suspense & lazy loading, transitions & actions, accessibility & testing |
-| HTTP Client | fetch | axios |
-| Security | — | Hide content when the page is hidden, Content Security Policy, clipboard permissions |
+| React | Components & props, state & events, effects, lists & keys, forms, context, refs & the DOM, Suspense & lazy loading, transitions & actions, accessibility & testing | — |
+| HTTP Client | fetch, axios | — |
+| Security | Hide content when the page is hidden | Content Security Policy, clipboard permissions |
 | Integration | — | Firebase |
 | Others | Browser & device | — |
 
@@ -37,7 +37,7 @@ The screen receives a `NavigationCategory` and the selected `FeatureRoute` from 
 
 | Gap | Effect | Suggested fix |
 | --- | --- | --- |
-| Most topics are planned | The catalogue is mostly a roadmap | Implement topics one at a time, each with its specs |
+| Three topics are still planned (Content Security Policy, clipboard permissions, Firebase) | Their rows cannot be opened | Implement topics one at a time, each with its specs |
 | Planned rows give no feedback when clicked | Users may think the click failed | Accepted (CAT-AC-03) |
 
 ## Verification
